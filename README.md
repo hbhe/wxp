@@ -1,14 +1,14 @@
 # 微信公众号运营平台
 
 1、下载源码
-git clone https://github.com/hbhe/wxp
-composer install (如果很慢，可以直接copy vendor目录)
+* git clone https://github.com/hbhe/wxp
+* composer install (如果很慢，可以直接copy vendor目录)
 
 2、建database
-CREATE DATABASE wxp DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci;
+* CREATE DATABASE wxp DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci;
 
-3、复制.env.list文件 改为.env后缀，并配置文件, 设置db参数
-Edit the file .env
+3、创建.env文件(可由.env.list复制后编辑)，编辑配置文件, 设置db参数
+
 
 ```php
 DB_DSN           = mysql:host=localhost;port=3306;dbname=wxp
