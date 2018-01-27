@@ -65,30 +65,33 @@ GLIDE_MAX_IMAGE_SIZE = 4000000
 
 
 4、执行命令，安装相关的数据库表
-cd console                                                           // php yii app/setup ?
+
+cd console                // php yii app/setup ?
+
 必选安装:
-php yii migrate/up --migrationPath=@common/wosotech/modules/keyStorage/migrations
-php yii migrate --migrationPath=@noam148/imagemanager/migrations
-php yii migrate/up
-php yii rbac-migrate   // 给初始化用户分配权限
+* php yii migrate/up --migrationPath=@common/wosotech/modules/keyStorage/migrations
+* php yii migrate --migrationPath=@noam148/imagemanager/migrations
+* php yii migrate/up
+* php yii rbac-migrate   // 给初始化用户分配权限
+
 
 可选安装:
-php yii migrate/up --migrationPath=@common/modules/bargain/migrations      // 砍价活动
-php yii migrate/up --migrationPath=@common/modules/wall/migrations         // 微信现场活动(包括：微信签到，微信消息互动上墙， 微信摇一摇抽奖)
-php yii migrate/up --migrationPath=@common/modules/redpack/migrations      // 会员推荐送红包活动
+* php yii migrate/up --migrationPath=@common/modules/bargain/migrations      // 砍价活动
+* php yii migrate/up --migrationPath=@common/modules/wall/migrations         // 微信现场活动(包括：微信签到，微信消息互动上墙， 微信摇一摇抽奖)
+* php yii migrate/up --migrationPath=@common/modules/redpack/migrations      // 会员推荐送红包活动
 
-5、
-后台访问地址: http://127.0.0.1/wxp/backend/web/
+
+5、后台访问地址: http://127.0.0.1/wxp/backend/web/
 
 用户名: webmaster     密码: webmaster
 
 
-本平台特点:
+#本平台特点:
 
-1、支持管理多个公众号
-2、可以对第三方开发者提供获取openid的接口(网页授权); 不仅可以自定义关键词对消息进行处理，还可以将收到的微信消息原封不动地转发给第三方, 接受第三方处理消息后的返回结果
-3、以模块的形式支付上架营销活动，并提供了一个砍价活动例子(RESTful)
-4、粉丝管理、菜单管理、会员管理、部门管理、关键词定义、
-5、3个微信现场活动: 微信签到上墙、微信互动消息上墙、微信摇一摇抽奖
+* 支持管理多个公众号
+* 可以对第三方开发者提供获取openid的接口(网页授权); 不仅可以自定义关键词对消息进行处理，还可以将收到的微信消息原封不动地转发给第三方, 接受第三方处理消息后的返回结果
+* 以模块的形式支付上架营销活动，并提供了一个砍价活动例子(RESTful)
+* 粉丝管理、菜单管理、会员管理、部门管理、关键词定义、
+* 3个微信现场活动: 微信签到上墙、微信互动消息上墙、微信摇一摇抽奖
 
 
