@@ -31,7 +31,7 @@ class WxpaynotifyController extends Controller
         /*        
         yii::warning(print_r($data,true));
         array (
-            [appid] => wxfadd14294fa1624f
+            [appid] => wxxxxxxxxx
             [bank_type] => CMB_DEBIT
             [cash_fee] => 1
             [fee_type] => CNY
@@ -98,13 +98,13 @@ class WxpaynotifyController extends Controller
 /*    
 data:Array
 (
-    [appid] => wx1b122a21f985ea18
+    [appid] => appid-11111
     [attach] => test
     [bank_type] => CFT
     [cash_fee] => 1
     [fee_type] => CNY
     [is_subscribe] => Y
-    [mch_id] => 1234585602
+    [mch_id] => 8888888888
     [nonce_str] => vwf9z3l6mzuqlg8f60mmztifw0i0dd7i
     [openid] => oKgUduJJFo9ocN8qO9k2N5xrKoGE
     [out_trade_no] => 55309EEB68562
@@ -119,13 +119,13 @@ data:Array
 
 // for test
 $data = [];
-$data['appid'] = 'wx1b122a21f985ea18';
+$data['appid'] = 'appid-11111';
 $data['attach'] = 'test';
 $data['bank_type'] = 'CFT';
 $data['cash_fee'] = '1';
 $data['fee_type'] = 'CNY';
 $data['is_subscribe'] = 'Y';
-$data['mch_id'] = '1234585602';
+$data['mch_id'] = '8888888888';
 $data['nonce_str'] = 'vwf9z3l6mzuqlg8f60mmztifw0i0dd7i';
 $data['openid'] = 'oKgUduJJFo9ocN8qO9k2N5xrKoGE';
 $data['out_trade_no'] = '5530864F670CB';
