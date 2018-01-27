@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="../js/base.js"></script>
+  <link rel="stylesheet" href="../css/activity.css">
+  <link rel="stylesheet" href="../css/pwstabs.min.css">
+  <link rel="stylesheet" href="../css/daterangepicker.min.css">
+  <script src="../js/pwstabs.min.js"></script>
+  <title>index</title>
+</head>
+<body>
+<div flex="dir:top cross:center main:justify" class="main" style="height: 1100px;">
+  <header flex="main:center">
+ <section flex="cross:center main:justify">
+  <div class="left" flex="">
+   <div class="logo">
+    <div>甜橙金融</div>
+    <div>
+     <div class="text-small">
+      ORANGEFINACE
+     </div>
+    </div>
+   </div>
+   <div class="title">
+    甜橙金融·红包铺子平台
+   </div>
+  </div>
+  
+  
+  <div class="right">
+   <div class="tootip">
+    欢迎你：
+    <span><a href="">湖北省-张三</a></span>
+    <span><a href="">系统管理员</a></span>
+    <span><a href="">修改密码</a></span>
+    <span><a href="">退出登录</a></span>
+   </div>
+  </div>
+  
+  
+ </section>
+</header>
+  <div flex="" class="content">
+    <section class="left">
+      <div class="VerticalMenu">
+    
+    <div style="background: #ffffff">
+        <div style="background: #ffffff">
+            <!--<i class="fa fa-file" aria-hidden="true"></i>-->
+            <i class="fa fa-home" aria-hidden="true"></i>
+            <a href="index.html">
+                <b>首页</b>
+            </a>
+        </div>
+        <div name="xz" style="display: none;">
+
+        </div>
+    </div>
+    <div>
+        <div>
+            <!--<i class="fa fa-file" aria-hidden="true"></i>-->
+            <i class="fa fa-tachometer" aria-hidden="true"></i>
+            <span>
+                <b>活动管理</b>
+            </span>
+            <i class="fa fa-angle-right fa-lg" leng="" style="transform: rotate(0deg);"></i></div>
+        <div name="xz" style="display:block">
+            <div>
+                <div style=""><a href="./activity_search.html" target="right">活动查询</a></div>
+            </div>
+            <div>
+                <div style="background-color: #fbceac;"><a href="./activity_add.html" >活动新增</a></div>
+            </div>
+            <div>
+                <div style=""><a href="./activity_check.html" target="right">活动审核</a></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <!--<i class="fa fa-file" aria-hidden="true"></i>-->
+            <i class="fa fa-tachometer" aria-hidden="true"></i>
+            <span>
+                <b>账户管理</b>
+            </span>
+            <i class="fa fa-angle-right fa-lg" leng="" style="transform: rotate(0deg);"></i>
+        </div>
+        <div name="xz" style="display:none">
+            <div>
+                <div style=""><a href="./user_search.html" target="right">账户查询</a></div>
+            </div>
+            <div>
+                <div style=""><a href="./user_add.html" target="right">新建账户</a></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <!--<i class="fa fa-file" aria-hidden="true"></i>-->
+            <i class="fa fa-tachometer" aria-hidden="true"></i>
+            <span>
+                <b>数据分析</b>
+            </span>
+            <i class="fa fa-angle-right fa-lg" leng="" style="transform: rotate(0deg);"></i>
+        </div>
+        <div name="xz" style="display:none">
+            <div>
+                <div style=""><a href="./data_search.html" target="right">数据分析</a></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+    </section>
+    <section class="right">
+      <!--右-->
+      <div class="content_title" flex="cross:center">
+    <h1>活动新增</h1>
+</div>
+      <div class="activity_content">
+        <div data-pws-tab="anynameyouwant1" data-pws-tab-name="按翼支付分级券">
+          <div flex="main:justify">
+    <div class="preview">
+        <header>
+            <img src="../img/add_top.png" alt="">
+        </header>
+        <div class="section">
+            <div class="lists" flex="main:justify cross:center">
+                <div flex="main:center cross:center">
+                    <img src="" alt="">
+                    <div class="desc">
+                        上传图片 <br>
+                        +
+                    </div>
+                </div>
+                <div flex="dir:top main:justify">
+                    <div class="activity_title">代金券名称</div>
+                    <div class="activity_remark">仅限翼支付 3 星级·电信用户</div>
+                    <div flex="cross:bottom">
+                        <div class="activity_money">0.10</div>
+                        <div class="activity_desc">满30元使用</div>
+                    </div>
+                </div>
+                <div>
+                    <img src="../img/add_process.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="triangle"></div>
+    <div class="form_wrap">
+        <div class="form">
+            <header>
+                <div class="title">代金券基础信息</div>
+            </header>
+            <div class="control_group">
+                <div class="control" flex="">
+                    <div class="label">代金券名称：</div>
+                    <div class="input control_input">
+                        <input type="text" placeholder="输入代金券名称" oninput="changeVal(this,'.activity_title')">
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">活动编号：</div>
+                    <div class="input control_input">
+                        <input type="text" placeholder="输入集团活动编号">
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">使用描述：</div>
+                    <div class="input control_input">
+                        <input type="text" placeholder="例：仅限翼支付3星级电信用户" oninput="changeVal(this,'.activity_remark')">
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">代金券面额：</div>
+                    <div class="input control_input">
+                        <input type="text" placeholder="例：0.10" oninput="changeVal(this,'.activity_money')">
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">代金券触发金额：</div>
+                    <div class="input control_input">
+                        <input type="text" placeholder="例：1.00元" oninput="changeVal(this,'.activity_desc')">
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">活动地区：</div>
+                    <div class="input control_address" flex="main:justify cross:center">
+                        <select name="" id="">
+                            <option value="">地区1</option>
+                        </select>
+                        <select name="" id="">
+                            <option value="">地区2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">活动类型：</div>
+                    <div class="input control_type">
+                        <select name="" id="">
+                            <option value="指定时间段">指定时间段</option>
+                            <option value="周循环">周循环</option>
+                            <option value="月循环">月循环</option>
+                        </select>
+                    </div>
+                </div>
+                
+                
+                <div class="control" flex="">
+                    <div class="label">活动时间：</div>
+                    <div class="input control_input">
+                        <input type="text" class="ac_date" placeholder="">
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label"></div>
+                    <div class="control_day" flex-box="0">
+                        
+
+                        
+                        <label for="z0">周一</label>  <input type="checkbox" id="z0">
+                        
+                        <label for="z1">周二</label>  <input type="checkbox" id="z1">
+                        
+                        <label for="z2">周三</label>  <input type="checkbox" id="z2">
+                        
+                        <label for="z3">周四</label>  <input type="checkbox" id="z3">
+                        
+                        <label for="z4">周五</label>  <input type="checkbox" id="z4">
+                        
+                        <label for="z5">周六</label>  <input type="checkbox" id="z5">
+                        
+                        <label for="z6">周日</label>  <input type="checkbox" id="z6">
+                        
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">每日发券数量：</div>
+                    <div class="input control_input2">
+                        <input type="text" placeholder="">
+                        张
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">每日展示时间：</div>
+                    <div class="input control_input2">
+                        <select name="" id="">
+                            
+                            <option value="">0:00</option>
+                            
+                            <option value="">1:00</option>
+                            
+                            <option value="">2:00</option>
+                            
+                            <option value="">3:00</option>
+                            
+                            <option value="">4:00</option>
+                            
+                            <option value="">5:00</option>
+                            
+                            <option value="">6:00</option>
+                            
+                            <option value="">7:00</option>
+                            
+                            <option value="">8:00</option>
+                            
+                            <option value="">9:00</option>
+                            
+                            <option value="">10:00</option>
+                            
+                            <option value="">11:00</option>
+                            
+                            <option value="">12:00</option>
+                            
+                            <option value="">13:00</option>
+                            
+                            <option value="">14:00</option>
+                            
+                            <option value="">15:00</option>
+                            
+                            <option value="">16:00</option>
+                            
+                            <option value="">17:00</option>
+                            
+                            <option value="">18:00</option>
+                            
+                            <option value="">19:00</option>
+                            
+
+                        </select>
+                        至
+                        <select name="" id="">
+                            
+                            <option value="">0:00</option>
+                            
+                            <option value="">1:00</option>
+                            
+                            <option value="">2:00</option>
+                            
+                            <option value="">3:00</option>
+                            
+                            <option value="">4:00</option>
+                            
+                            <option value="">5:00</option>
+                            
+                            <option value="">6:00</option>
+                            
+                            <option value="">7:00</option>
+                            
+                            <option value="">8:00</option>
+                            
+                            <option value="">9:00</option>
+                            
+                            <option value="">10:00</option>
+                            
+                            <option value="">11:00</option>
+                            
+                            <option value="">12:00</option>
+                            
+                            <option value="">13:00</option>
+                            
+                            <option value="">14:00</option>
+                            
+                            <option value="">15:00</option>
+                            
+                            <option value="">16:00</option>
+                            
+                            <option value="">17:00</option>
+                            
+                            <option value="">18:00</option>
+                            
+                            <option value="">19:00</option>
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control" flex="main:justify">
+                    <div class="label">使用说明：</div>
+                    <div class="link">
+                        <a href="">使用说明模板</a>
+                    </div>
+                </div>
+                <div class="control_text">
+                <textarea>
+
+                </textarea>
+                </div>
+            </div>
+
+        </div>
+        <div class="control_submit">
+            <button>确认提交</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function changeVal(obj, el) {
+        console.log($(el));
+        $(el).text($(obj).val())
+    }
+</script>
+        </div>
+        <div data-pws-tab="anynameyouwant2" data-pws-tab-name="按电信分级券">
+          <div flex="main:justify">
+    <div class="preview">
+        <header>
+            <img src="../img/add_top.png" alt="">
+        </header>
+        <div class="section">
+            <div class="lists" flex="main:justify cross:center">
+                <div flex="main:center cross:center">
+                    <img src="" alt="">
+                    <div class="desc">
+                        上传图片 <br>
+                        +
+                    </div>
+                </div>
+                <div flex="dir:top main:justify">
+                    <div class="activity_title">代金券名称</div>
+                    <div class="activity_remark">仅限翼支付 3 星级·电信用户</div>
+                    <div flex="cross:bottom">
+                        <div class="activity_money">0.10</div>
+                        <div class="activity_desc">满30元使用</div>
+                    </div>
+                </div>
+                <div>
+                    <img src="../img/add_process.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="triangle"></div>
+    <div class="form_wrap">
+        <div class="form">
+            <header>
+                <div class="title">代金券基础信息</div>
+            </header>
+            <div class="control_group">
+                <div class="control" flex="">
+                    <div class="label">代金券名称：</div>
+                    <div class="input control_input">
+                        <input type="text" placeholder="输入代金券名称" oninput="changeVal(this,'.activity_title')">
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">活动编号：</div>
+                    <div class="input control_input">
+                        <input type="text" placeholder="输入集团活动编号">
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">使用描述：</div>
+                    <div class="input control_input">
+                        <input type="text" placeholder="例：仅限翼支付3星级电信用户" oninput="changeVal(this,'.activity_remark')">
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">代金券面额：</div>
+                    <div class="input control_input">
+                        <input type="text" placeholder="例：0.10" oninput="changeVal(this,'.activity_money')">
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">代金券触发金额：</div>
+                    <div class="input control_input">
+                        <input type="text" placeholder="例：1.00元" oninput="changeVal(this,'.activity_desc')">
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">活动地区：</div>
+                    <div class="input control_address" flex="main:justify cross:center">
+                        <select name="" id="">
+                            <option value="">地区1</option>
+                        </select>
+                        <select name="" id="">
+                            <option value="">地区2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">活动类型：</div>
+                    <div class="input control_type">
+                        <select name="" id="">
+                            <option value="指定时间段">指定时间段</option>
+                            <option value="周循环">周循环</option>
+                            <option value="月循环">月循环</option>
+                        </select>
+                    </div>
+                </div>
+                
+                
+                <div class="control" flex="">
+                    <div class="label">用户等级：</div>
+                    <div class=" control_level" flex="">
+                        <div >
+                            <input type="checkbox" id="level1"> <label for="level1">1~3星级</label>
+                        </div>
+                        <div >
+                            <input type="checkbox" id="level2"> <label for="level2">4~6星级</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control" flex="">
+                    <div class="label">活动时间：</div>
+                    <div class="input control_input">
+                        <input type="text" class="ac_date_dx" placeholder="">
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label"></div>
+                    <div class="control_day" flex-box="0">
+                        
+
+                        
+                        <label for="z0">周一</label>  <input type="checkbox" id="z0">
+                        
+                        <label for="z1">周二</label>  <input type="checkbox" id="z1">
+                        
+                        <label for="z2">周三</label>  <input type="checkbox" id="z2">
+                        
+                        <label for="z3">周四</label>  <input type="checkbox" id="z3">
+                        
+                        <label for="z4">周五</label>  <input type="checkbox" id="z4">
+                        
+                        <label for="z5">周六</label>  <input type="checkbox" id="z5">
+                        
+                        <label for="z6">周日</label>  <input type="checkbox" id="z6">
+                        
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">每日发券数量：</div>
+                    <div class="input control_input2">
+                        <input type="text" placeholder="">
+                        张
+                    </div>
+                </div>
+                <div class="control" flex="">
+                    <div class="label">每日展示时间：</div>
+                    <div class="input control_input2">
+                        <select name="" id="">
+                            
+                            <option value="">0:00</option>
+                            
+                            <option value="">1:00</option>
+                            
+                            <option value="">2:00</option>
+                            
+                            <option value="">3:00</option>
+                            
+                            <option value="">4:00</option>
+                            
+                            <option value="">5:00</option>
+                            
+                            <option value="">6:00</option>
+                            
+                            <option value="">7:00</option>
+                            
+                            <option value="">8:00</option>
+                            
+                            <option value="">9:00</option>
+                            
+                            <option value="">10:00</option>
+                            
+                            <option value="">11:00</option>
+                            
+                            <option value="">12:00</option>
+                            
+                            <option value="">13:00</option>
+                            
+                            <option value="">14:00</option>
+                            
+                            <option value="">15:00</option>
+                            
+                            <option value="">16:00</option>
+                            
+                            <option value="">17:00</option>
+                            
+                            <option value="">18:00</option>
+                            
+                            <option value="">19:00</option>
+                            
+
+                        </select>
+                        至
+                        <select name="" id="">
+                            
+                            <option value="">0:00</option>
+                            
+                            <option value="">1:00</option>
+                            
+                            <option value="">2:00</option>
+                            
+                            <option value="">3:00</option>
+                            
+                            <option value="">4:00</option>
+                            
+                            <option value="">5:00</option>
+                            
+                            <option value="">6:00</option>
+                            
+                            <option value="">7:00</option>
+                            
+                            <option value="">8:00</option>
+                            
+                            <option value="">9:00</option>
+                            
+                            <option value="">10:00</option>
+                            
+                            <option value="">11:00</option>
+                            
+                            <option value="">12:00</option>
+                            
+                            <option value="">13:00</option>
+                            
+                            <option value="">14:00</option>
+                            
+                            <option value="">15:00</option>
+                            
+                            <option value="">16:00</option>
+                            
+                            <option value="">17:00</option>
+                            
+                            <option value="">18:00</option>
+                            
+                            <option value="">19:00</option>
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control" flex="main:justify">
+                    <div class="label">使用说明：</div>
+                    <div class="link">
+                        <a href="">使用说明模板</a>
+                    </div>
+                </div>
+                <div class="control_text">
+                <textarea>
+
+                </textarea>
+                </div>
+            </div>
+
+        </div>
+        <div class="control_submit">
+            <button>确认提交</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function changeVal(obj, el) {
+        console.log($(el));
+        $(el).text($(obj).val())
+    }
+</script>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="http://cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+<script src="../js/jquery.daterangepicker.min.js"></script>
+<script type="text/javascript">
+  $(function(){
+  $('.ac_date').dateRangePicker(
+        {
+          separator: " - ",
+          format: 'YYYY/MM/DD'
+        })
+  .bind('datepicker-change', function (event, obj) {
+    /* This event will be triggered when second date is selected */
+    console.log(obj);
+    // obj will be something like this:
+    // {
+    // 		date1: (Date object of the earlier date),
+    // 		date2: (Date object of the later date),
+    //	 	value: "2013-06-05 to 2013-06-07"
+    // }
+  })
+    $('.ac_date_dx').dateRangePicker(
+        {
+          separator: " - ",
+          format: 'YYYY/MM/DD'
+        })
+        .bind('datepicker-change', function (event, obj) {
+
+        })
+  $('.activity_content').pwstabs();
+  })
+</script>
+</body>
+</html>

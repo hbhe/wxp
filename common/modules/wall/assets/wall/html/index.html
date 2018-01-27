@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    :root{
+      width: 100%;
+      height: 100%;
+    }
+    body{
+      width: 100%;
+      height: 100%;
+      background: url(../img/qdbg.jpg);
+      background-size: 100% 100%;
+    }
+  </style>
+</head>
+<body style="display: flex;justify-content: center;align-items: center">
+<canvas id="bgCanvas" width="600" height="600" style="display: none">
+
+</canvas>
+<!--<button onclick="drawLogo.addImg()">add</button>-->
+<canvas id="showCanvas" >
+
+</canvas>
+<script>
+
+  var drawLogo={
+    init:function(){
+      this.canvas=document.querySelector('#bgCanvas')
+      this.showCanvas=document.querySelector('#showCanvas')
+      this.width = this.canvas.width;
+      this.height = this.canvas.height;
+      this.showCanvas.width=this.width;
+      this.showCanvas.height=this.height;
+      this.c=this.canvas.getContext('2d')
+      this.ctx=this.showCanvas.getContext('2d')
+      this.imgCount=0;
+      this.bgImg=new Image();
+      this.bgImg.src="../img/logo.png";
+      var self=this;
+      this.bgImg.onload=function(){
+        self.drawLogo();
+      }
+      //圆点直径
+      this.dis = 30;
+      //上次行宽位置
+      this.lw = this.width;
+      this.dots = [];
+    },
+    drawLogo:function(){
+      this.c.drawImage(this.bgImg,0,0,this.width,this.height);
+      this.imgData=this.c.getImageData(0,0,this.width,this.height);
+      var data=this.imgData.data;
+      for(var i=0;i<data.length;i+=4*this.dis){
+        var l ;
+        if(i/4 >= this.lw){
+          this.lw += this.dis*this.width;
+          l = i/4;
+          l+=(this.dis-1)*this.width;
+          i = 4 *l;
+        }
+        if(data[i+3] > 0){
+          this.dots.push({x:(i/4)%this.width,y:((i/4)/this.width),id:i});
+        }
+      }
+      var colors=['#fc9cc6','#27b598','#fc7e84','#1841b2','#537504','#518bf7']
+      //画圆
+      for(var j = 0;j< this.dots.length;j++){
+//        this.ctx.fillStyle = colors[Math.floor(Math.random()*10)];
+        this.ctx.fillStyle = "rgba(255,255,255,.6)";
+        this.ctx.beginPath();
+        this.ctx.arc(this.dots[j].x, this.dots[j].y, this.dis/2, 0, 2 * Math.PI, true);
+        this.ctx.closePath();
+        this.ctx.fill();
+      }
+    },
+    addImg:function(imgPath){
+      console.log(this);
+      var j=this.imgCount;
+      var ctx=this.ctx,dots=this.dots,dis=this.dis;
+      var bgImg=new Image();
+      bgImg.src=imgPath||"../img/1.jpg";
+
+      bgImg.onload=function(){
+        ctx.beginPath();
+        ctx.save();
+        ctx.arc(dots[j].x, dots[j].y, dis/2, 0, 2 * Math.PI);
+        ctx.clip();
+        //,dots[j].x-dis/2,dots[j].y-dis/2,dis,dis
+        ctx.drawImage(bgImg,
+            dots[j].x-dis/2,
+            dots[j].y-dis/2,
+            dis+dis/2,
+            dis+dis/2)
+        ctx.restore()
+        ctx.closePath()
+      }
+
+      this.imgCount+=1;
+    }
+  }
+  drawLogo.init();
+</script>
+</body>
+</html>

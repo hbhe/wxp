@@ -1,0 +1,236 @@
+{
+	"variables": [],
+	"info": {
+		"name": "bargain-remote",
+		"_postman_id": "db0042a8-b891-e666-001f-11d1d4fb48a0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "获取活动参数",
+			"request": {
+				"url": {
+					"raw": "http://api.mysite.com/v1/bargain-topics/1?access-token=wx3283c99746957d28",
+					"protocol": "http",
+					"host": [
+						"api",
+						"mysite",
+						"com"
+					],
+					"path": [
+						"v1",
+						"bargain-topics",
+						"1"
+					],
+					"query": [
+						{
+							"key": "access-token",
+							"value": "wx3283c99746957d28",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "得到某商品详情",
+			"request": {
+				"url": {
+					"raw": "http://api.mysite.com/v1/bargain-topics/1?access-token=wx3283c99746957d28",
+					"protocol": "http",
+					"host": [
+						"api",
+						"mysite",
+						"com"
+					],
+					"path": [
+						"v1",
+						"bargain-topics",
+						"1"
+					],
+					"query": [
+						{
+							"key": "access-token",
+							"value": "wx3283c99746957d28",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "得到某个粉丝的砍价信息",
+			"request": {
+				"url": {
+					"raw": "http://api.mysite.com/v1/bargain-posts/1?access-token=wx3283c99746957d28",
+					"protocol": "http",
+					"host": [
+						"api",
+						"mysite",
+						"com"
+					],
+					"path": [
+						"v1",
+						"bargain-posts",
+						"1"
+					],
+					"query": [
+						{
+							"key": "access-token",
+							"value": "wx3283c99746957d28",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "得到某个粉丝的帮砍记录列表",
+			"request": {
+				"url": {
+					"raw": "http://api.mysite.com/v1/bargain-comments?access-token=wx3283c99746957d28&post_id=1&expand=wxUser",
+					"protocol": "http",
+					"host": [
+						"api",
+						"mysite",
+						"com"
+					],
+					"path": [
+						"v1",
+						"bargain-comments"
+					],
+					"query": [
+						{
+							"key": "access-token",
+							"value": "wx3283c99746957d28",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "post_id",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "expand",
+							"value": "wxUser",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "粉丝创建活动",
+			"request": {
+				"url": {
+					"raw": "http://api.mysite.com/v1/bargain-posts?access-token=wx3283c99746957d28",
+					"protocol": "http",
+					"host": [
+						"api",
+						"mysite",
+						"com"
+					],
+					"path": [
+						"v1",
+						"bargain-posts"
+					],
+					"query": [
+						{
+							"key": "access-token",
+							"value": "wx3283c99746957d28",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"gh_id\": \"gh_4b9887a417ef\",\r\n  \"topic_id\": 1,\r\n  \"openid\": \"on1d1t6JtXGsXPfn91zSKz8gN111\",\r\n  \"name\": \"hbhe1\",\r\n  \"phone\": \"13545222924\",\r\n  \"item_id\": 1\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "砍一次",
+			"request": {
+				"url": {
+					"raw": "http://api.mysite.com/v1/bargain-comments?access-token=wx3283c99746957d28",
+					"protocol": "http",
+					"host": [
+						"api",
+						"mysite",
+						"com"
+					],
+					"path": [
+						"v1",
+						"bargain-comments"
+					],
+					"query": [
+						{
+							"key": "access-token",
+							"value": "wx3283c99746957d28",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"gh_id\": \"gh_4b9887a417ef\",\r\n    \"openid\": \"aaabbb\",\r\n    \"post_id\": 1\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

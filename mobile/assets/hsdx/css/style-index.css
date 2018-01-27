@@ -1,0 +1,187 @@
+form input,
+form textarea {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  font-size: inherit;
+}
+
+form button {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  background-color: #fff;
+}
+
+@font-face {
+  font-family: "RTWS YueGothic Trial Regular";
+  src: url("9cdec58322cb4c3eb8ee1e7a2e459c31.eot");
+  src: url("9cdec58322cb4c3eb8ee1e7a2e459c31.eot?#iefix") format("embedded-opentype"), url("9cdec58322cb4c3eb8ee1e7a2e459c31.woff2") format("woff2"), url("9cdec58322cb4c3eb8ee1e7a2e459c31.woff") format("woff"), url("9cdec58322cb4c3eb8ee1e7a2e459c31.ttf") format("truetype"), url("9cdec58322cb4c3eb8ee1e7a2e459c31.svg#RTWS YueGothic Trial Regular") format("svg");
+}
+
+.main {
+  max-width: 10rem;
+  height: 100%;
+  margin: 0 auto;
+  font-size: 0.44rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.main::before {
+  content: ' ';
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #baced1;
+  height: 5rem;
+  z-index: 0;
+}
+
+.vip-card {
+  position: relative;
+  margin: 0 auto;
+  margin-top: 1.57333333rem;
+  z-index: 1;
+  width: 8.53333333rem;
+  height: 4.53333333rem;
+  box-shadow: 0 0.16rem 0.38666667rem rgba(28, 216, 210, 0.53);
+  border-radius: 0.21333333rem;
+  background-color: #85c8dd;
+  background-image: linear-gradient(-12deg, #1cd8d2 0%, #93edc7 100%);
+  overflow: hidden;
+}
+
+.vip-card .vip-logo {
+  width: 2.46666667rem;
+  height: 1.85333333rem;
+  display: block;
+  margin: 0 auto;
+  margin-top: 0.33333333rem;
+}
+
+.vip-card .vip-liner {
+  width: 100%;
+  height: 0.05333333rem;
+  border-radius: 0.01333333rem;
+  background-color: #93edc7;
+}
+
+.vip-card .vip-text {
+  text-align: center;
+  margin-top: 0.32rem;
+  margin-bottom: 0.32rem;
+}
+
+.vip-card .vip-text-chinese {
+  width: 5.65333333rem;
+  margin: 0 auto;
+  color: #000000;
+  font-family: 'RTWS YueGothic Trial Regular';
+  font-size: 0.66666667rem;
+  font-weight: bold;
+}
+
+.vip-card .vip-text-py {
+  width: 5.66666667rem;
+  margin: 0 auto;
+  color: #000000;
+  font-family: Arial;
+  font-size: 0.26666667rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.form {
+  text-align: center;
+  margin-top: 0.92rem;
+}
+
+.form .input-controller {
+  width: 7.06666667rem;
+  height: 1.06666667rem;
+  border: 0.02666667rem solid #464646;
+  border-radius: 0.21333333rem;
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 0.36rem;
+}
+
+.form .input-controller input[type='tel'] {
+  width: 100%;
+  height: 100%;
+  color: #000;
+  border: 0;
+  border-radius: 0.21333333rem;
+  outline: none;
+  -webkit-appearance: none;
+  text-indent: 0.13333333rem;
+}
+
+.form .input-controller .getCode {
+  width: 2.66666667rem;
+  text-align: center;
+  flex-shrink: 0;
+  height: 100%;
+  color: #ffffff;
+  font-family: "Source Han Sans CN";
+  font-size: 0.44rem;
+  font-weight: 500;
+  border-radius: 0.21333333rem;
+  background-color: #00c0ba;
+  background-image: linear-gradient(-12deg, #00c0ba 0%, #00c0ba 100%);
+}
+
+.form input[type='button']:disabled {
+  background: #999;
+}
+
+.form .submit {
+  width: 7.06666667rem;
+  height: 1.06666667rem;
+  color: #ffffff;
+  font-family: "Source Han Sans CN";
+  font-size: 0.44rem;
+  font-weight: 500;
+  line-height: 1.16rem;
+  border-radius: 0.21333333rem;
+  background-color: #00c0ba;
+  background-color: #bbcccf;
+  background-image: linear-gradient(-12deg, #00c0ba 0%, #00c0ba 100%);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.rule-msg {
+  width: 8.53333333rem;
+  min-height: 2.93333333rem;
+  border-radius: 0.13333333rem;
+  border: 0.02666667rem solid #00c0ba;
+  padding: 0.29333333rem;
+  margin: 0 auto;
+  margin-top: 0.8rem;
+}
+
+.rule-msg .title {
+  color: #000000;
+  font-family: "Source Han Sans CN";
+  font-size: 0.44rem;
+  font-weight: 400;
+  line-height: 0.56rem;
+  text-transform: uppercase;
+  text-align: center;
+}

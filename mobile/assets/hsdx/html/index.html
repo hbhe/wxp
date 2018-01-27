@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.2/??flexible_css.js,flexible.js"></script>
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="telephone=no,email=no" name="format-detection">
+  <link rel="stylesheet" href="../css/style-index.css">
+  <title>Title</title>
+</head>
+<body>
+  <div class="main">
+    <div class="vip-card">
+      <img src="../img/vip.png" class="vip-logo" alt="">
+      <div class="vip-text">
+        <div class="vip-text-chinese">黄石电信微信会员</div>
+        <div class="vip-text-py">Huanggang Telecom WeChat member</div>
+      </div>
+      <div class="vip-liner"></div>
+    </div>
+    <form class="form">
+      <div class="input-controller">
+        <input type="tel" class="mobile" placeholder="输入你的手机号码" maxlength="12">
+      </div>
+      <div class="input-controller">
+        <input type="tel" placeholder="输入验证码" class="code" maxlength="6" >
+        <input type="button" class="getCode" value="获取验证码" disabled>
+      </div>
+      <input type="button" class="submit" value="绑定会员" >
+    </form>
+    <div class="rule-msg">
+      <div class="title">标题</div>
+      <div class="msg">ssdfsdfsdfsfsdfsd</div>
+    </div>
+  </div>
+  <script src="http://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+  <script>
+    var timer, time = 60
+    $('.getCode').on('click', function () {
+      if (!timer) {
+        $(this).val(time + 's').attr('disabled', 'disabled')
+        timer = setInterval(function () {
+          time --
+          if (time <= 0) {
+            time = 60
+            $(this).val('获取验证码').removeAttr('disabled')
+            clearInterval(timer)
+            timer = undefined
+          } else {
+            $(this).val(time + 's').attr('disabled', 'disabled')
+          }
+        }.bind(this), 1000)
+      }
+    })
+    $('.mobile').on('input', function (){
+      if ($('.mobile').val().length === 0) {
+        $('.getCode').attr('disabled', 'disabled')
+      } else {
+        $('.getCode').removeAttr('disabled')
+      }
+    })
+  </script>
+</body>
+</html>

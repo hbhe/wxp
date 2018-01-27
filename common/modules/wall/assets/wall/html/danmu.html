@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/style-index.css">
+  <title>Title</title>
+</head>
+<body>
+
+<button onclick="barrager.emit({info:'test'})">emit</button>
+
+<script src="http://cdn.bootcss.com/animejs/1.0.0/anime.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script>
+  var item={
+    img:'', //图片
+    info:'请填写弹幕文字', //文字
+    href:'', //链接
+    close:true, //显示关闭按钮
+    speed:1, //延迟,单位秒,默认6
+    color:'#ff6666', //颜色,默认白色
+    old_ie_color:'#ff6666', //ie低版兼容色,不能与网页背景相同,默认黑色
+  }
+
+  var barrager={
+    init:function(ele){
+      this.box=document.querySelector(ele);
+      this.count=0;
+      this.maxHeight=this.box.clientHeight-80;
+      this.queuelen=20;  //显示个数
+      this.throttlelen=0;
+      this.speed=ele.speed ||10;
+    },
+    emit:function(data){
+      if (data instanceof Array){
+
+      }else{
+        console.log(this.throttlelen);
+        if(this.throttle()){
+          this.box.appendChild(this.createEle(data));
+          //添加动画
+          var child=document.querySelector("#barrager"+this.count)
+          console.log(this.box.clientWidth);
+          child.style.right=-child.offsetWidth+"px";
+          child.style.top=this.random(0,this.maxHeight)+"px";
+          var serf=this;
+          anime({
+            targets: [child],
+            translateX: -document.querySelector('body').offsetWidth-child.offsetWidth-50,
+            duration:1000*serf.speed,
+            easing:"linear",
+            complete:function(){
+              serf.throttlelen-=1;
+            }
+          });
+        }
+      }
+    },
+    createEle:function(obj){
+      this.count+=1;
+      var div=document.createElement('div');
+      div.className='barrager'
+      div.id="barrager"+this.count;
+      div.innerHTML="<img src='"+obj.img+"' alt=''><span style='color:"+this.randomColor()+";'>"+obj.info+"</span>";
+      return div;
+    },
+    //控制显示数量
+    throttle:function(){
+      if(this.throttlelen>this.queuelen){
+        return false;
+      }
+      this.throttlelen+=1;
+      return true;
+    },
+    random:function(min,max){
+      return Math.floor(Math.random()*(max-min+1)+min);
+    },
+    randomColor:function(){
+      var colors=["#6ac5f2","#1be299","#6cf0f7","#5ff458","#dbf296","#fff","#ffa4fe"];
+      return colors[this.random(0,colors.length-1)]
+    }
+  }
+  barrager.init('body')
+  barrager.emit({img:"../img/1.jpg",info:'gggg'})
+</script>
+</body>
+</html>

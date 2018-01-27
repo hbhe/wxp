@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="../css/style-flex.css">
+  <link rel="stylesheet" href="../css/style-process.css">
+  <link href='//cdn.webfont.youziku.com/webfonts/nomal/25528/46969/5865f6c4f629da1b8443ca1a.css' rel='stylesheet' type='text/css' />
+  <script src="http://cdn.bootcss.com/vue/2.1.6/vue.min.js"></script>
+</head>
+<body >
+<img src="../img/cjbg.jpg" style="width: 100%;height: 100%;position: absolute; z-index: -1" alt="">
+<div class="box" id="process" flex="dir:top  cross:center" >
+  <div style="height: 200px">&nbsp;</div>
+  <div class="box__process" v-show="!isOver">
+    <div class="box__process_items">
+      <div class="box__process_item" flex="cross:center" v-for="(item,index) of winList.data">
+        <div class="item-label" v-text="item.nickname"></div>
+        <div class="item-media">
+          <img :src="item.headimgurl" width="100%" height="100%" alt="">
+        </div>
+        <div class="item-process" :style="{'width': item.number+'px'}" @click="add(index)">
+        </div>
+      </div>
+      <div class="box__process_clock">
+        {{clock_text}}
+      </div>
+    </div>
+  </div>
+  <div class="box__prize " :class="{
+  four:winList.awardsnumber==20,
+  three:winList.awardsnumber==5,
+  two:winList.awardsnumber==3,
+  one:winList.awardsnumber==1}" v-show="isOver" >
+    <header flex="main:center cross:center">
+      <div class="title_t" v-text="winList.activityname">
+
+      </div>
+    </header>
+    <div style="" flex="main:center cross:center" class="list">
+      <ul flex="dir:top  cross:center" style="overflow: visible">
+        <li flex="cross:center" v-for="item of overList">
+          <img :src="item.headimgurl"  alt="">
+          <span v-text="item.nickname" style="text-overflow: ellipsis;overflow: hidden"></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script>
+  var vm = new Vue({
+    data: {
+      isOver: true,
+      var_clock: undefined,
+      time: 0,
+      clock_text: '',
+      overList: [
+        {
+          "number": 21,
+          "nickname": "忆丿、青春",
+          "headimgurl": "http://wx.qlogo.cn/mmopen/Xc8RQQic8LxQLfeyUNYfPZyhIwFWN9aANnJicP05kHiaW8ouW49qZU9MpxahYltdbo1Zic3suviaWRtRmaicB36xDicoPIibdFU6DPNe/46"
+        }
+      ],
+      winList: {
+        "code": 0,
+        "key": false,
+        "activityname": "三等奖",
+        "awardsnumber": "1",
+        "activitduration": "1",
+        "data": [
+          {
+            "number": 21,
+            "nickname": "忆丿、青春",
+            "headimgurl": "http://wx.qlogo.cn/mmopen/Xc8RQQic8LxQLfeyUNYfPZyhIwFWN9aANnJicP05kHiaW8ouW49qZU9MpxahYltdbo1Zic3suviaWRtRmaicB36xDicoPIibdFU6DPNe/46"
+          },
+          {
+            "number": 1,
+            "nickname": "vkd",
+            "headimgurl": "http://wx.qlogo.cn/mmopen/Xc8RQQic8LxQLfeyUNYfPZ7Ug6DLsA5nVCQrQiaTZiamQLIyXcGq82KCqibL11p1Cgh1aLoGHtzM2pKjAHjDZGL8pAn02vch6Bnx/46"
+          }
+        ]
+      },
+    },
+    mounted: function () {
+      console.log(this);
+      this.getData();
+      for(var i=0;i<1;i++){
+        this.winList.data.push(
+            {
+              "number": 100+1*i,
+              "nickname": "vkd",
+              "headimgurl": "http://wx.qlogo.cn/mmopen/Xc8RQQic8LxQLfeyUNYfPZ7Ug6DLsA5nVCQrQiaTZiamQLIyXcGq82KCqibL11p1Cgh1aLoGHtzM2pKjAHjDZGL8pAn02vch6Bnx/46"
+            })
+      }
+//      this.overList=this.winList.data
+//      this.add(1);
+    },
+    destoryed: function () {
+      clearInterval(this.var_clock)
+    }
+    ,
+    methods: {
+      add: function (index) {
+        this.winList.data[index].number += 1;
+      }
+      ,
+      formatClock: function (m, s) {
+        var result = ''
+        if (m >= 10) {
+          result = m;
+        }
+        else {
+          result = '0' + m;
+        }
+        if (s >= 10) {
+          result += ':' + s;
+        }
+        else {
+          result += ':0' + s
+        }
+        return result
+      },
+      getData: function () {
+        var serf = this;
+        setInterval(function () {
+          $.ajax({
+            success: function (data) {
+              //是否开始
+              //不能开始
+              if (data.activitstart === 'enabled') {
+
+                //活动开始
+                if (data.code == 0) {
+                  if (serf.winList.code == 0) {
+                    serf.winList.data = data.data;
+                  } else {
+                    serf.winList = data;
+                  }
+                } else {
+                  alert('error')
+                }
+                if (!serf.var_clock) {
+                  serf.clock()
+                }
+              }
+
+            }
+          })
+        }, 1000)
+      },
+      clock: function () {
+        var serf = this;
+        this.var_clock = setInterval(function () {
+          if (serf.winList.activitduration > 0) {
+            serf.winList.activitduration--;
+
+            if (serf.winList.activitduration < 60) {
+              serf.clock_text = serf.formatClock(0, serf.winList.activitduration);
+            }
+            else {
+              if (serf.winList.activitduration / 60 > 10) {
+                serf.clock_text = serf.formatClock(Math.floor(serf.winList.activitduration / 60), serf.winList.activitduration - serf.winList.activitduration * 60)
+              }
+              else {
+                serf.clock_text = serf.formatClock(Math.floor(serf.winList.activitduration / 60), (serf.winList.activitduration - Math.floor(serf.winList.activitduration / 60) * 60).toString())
+              }
+            }
+          }
+          else {
+            console.log('over');
+            serf.isOver = true;
+            for (var i = 0; i < serf.winList.awardsnumber; i++) {
+              if (serf.winList.data[i]) {
+                serf.overList.push(serf.winList.data[i])
+              }
+            }
+            clearInterval(serf.var_clock)
+          }
+        }, 1000)
+      }
+    }
+  }).$mount('#process')
+</script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/style-index.css">
+  <title>Title</title>
+  <style type="text/css">
+    *{
+      margin: 0px;
+      padding: 0px;
+    }
+    video{
+      position: fixed;
+      right: 0px;
+      bottom: 0px;
+      min-width: 100%;
+      min-height: 100%;
+      height: auto;
+      width: auto;
+      /*加滤镜*/
+      /*-webkit-filter: grayscale(100%);*/
+      /*filter:grayscale(100%);*/
+    }
+    source{
+      min-width: 100%;
+      min-height: 100%;
+      height: auto;
+      width: auto;
+    }
+  </style>
+</head>
+<body>
+  <video  autoplay loop="loop" id="video">
+    <source id="source" src="http://qiniu.ygrnzsm.com/%E5%B0%8F%E6%8F%90%E7%90%B4.mp4" type="video/mp4">
+  </video>
+<button onclick="barrager.emit({info:'test'})">emit</button>
+
+<script src="http://cdn.bootcss.com/animejs/1.0.0/anime.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script>
+
+
+  var barrager = {
+    init: function (ele) {
+      this.box = document.querySelector(ele);
+      this.count = 0;
+      this.maxHeight = this.box.clientHeight - 80;
+      this.queuelen = 20;  //显示个数
+      this.throttlelen = 0;  //当前显示的弹幕个数
+      this.speed = ele.speed || 10;
+      this.ququeSpeed = ele.ququeSpeed || 300; //多条数据时候 多少ms发送一次数据
+      this.lineNumber = 0;  //总行数
+      this.lineHeight = 0; //每行的高度 自动设置
+    },
+    emit: function (data) {
+      if (data instanceof Array) {
+        this.ququeData = data;
+        this.ququeExec = 0;
+        this.queue()
+      } else {
+        if (this.throttle()) {
+          this.box.appendChild(this.createEle(data));
+          //添加动画
+          var child = document.querySelector("#barrager" + this.count)
+          //计算行数和行高
+          if (this.lineNumber === 0) {
+            this.lineNumber = Math.ceil(this.maxHeight / child.offsetHeight);
+            this.lineHeight = child.offsetHeight;
+          }
+          child.style.right = -child.offsetWidth + "px";
+          //随机设置每一行的高度
+          child.style.top = this.random(0, this.lineNumber) * this.lineHeight + "px";
+          var serf = this;
+          anime({
+            targets: [child],
+            translateX: -document.querySelector('body').offsetWidth - child.offsetWidth - 50,
+            duration: 1000 * serf.speed,
+            easing: "linear",
+            complete: function () {
+              serf.throttlelen -= 1;
+              serf.box.removeChild(child);
+            }
+          });
+        }
+      }
+    },
+    queue: function (cb) {
+      this.emit(this.ququeData[this.ququeExec]);
+      this.ququeExec += 1;
+      if (!this.ququeCb && cb) this.ququeCb = cb;
+      if (this.ququeExec >= this.ququeData.length) {
+        this.ququeData = null;
+        this.ququeExec = 0;
+        this.ququeCb && this.ququeCb();
+        this.ququeCb = null;
+      }
+      else {
+        setTimeout(arguments.callee.bind(this), this.ququeSpeed)
+      }
+    },
+    createEle: function (obj) {
+      this.count += 1;
+      var div = document.createElement('div');
+      div.className = 'barrager'
+      div.id = "barrager" + this.count;
+      div.innerHTML = "<img src='" + obj.img + "' alt=''><span style='color:" + this.randomColor() + ";'>" + obj.info + "</span>";
+      return div;
+    },
+    //控制显示数量
+    throttle: function () {
+      if (this.throttlelen > this.queuelen) {
+        return false;
+      }
+      this.throttlelen += 1;
+      return true;
+    },
+    random: function (min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    },
+    randomColor: function () {
+      var colors = ["#00fe00", "#01eaff", "#b09eff", "#ff0097", "#48d6ff", "#ffec00"];
+      return colors[this.random(0, colors.length - 1)]
+    }
+  }
+  barrager.init('body')
+  barrager.emit([
+      {img: "../img/1.jpg", info: 'gggg'}, {img: "../img/1.jpg", info: 'gggg1'},
+      {img: "../img/1.jpg", info: 'gggg'}, {img: "../img/1.jpg", info: 'gggg1'},
+      {img: "../img/1.jpg", info: 'gggg'}, {img: "../img/1.jpg", info: 'gggg1'},
+      {img: "../img/1.jpg", info: 'gggg'}, {img: "../img/1.jpg", info: 'gggg1'},
+      {img: "../img/1.jpg", info: 'gggg'}, {img: "../img/1.jpg", info: 'gggg1'},
+      {img: "../img/1.jpg", info: 'gggg'}, {img: "../img/1.jpg", info: 'gggg1'},
+      {img: "../img/1.jpg", info: 'gggg'}, {img: "../img/1.jpg", info: 'gggg1'},
+      {img: "../img/1.jpg", info: 'gggg'}, {img: "../img/1.jpg", info: 'gggg1'},
+    {
+    img: "../img/1.jpg",
+    info: 'gggg2'
+  }])
+  var videoControl={
+    "1":"http://qiniu.ygrnzsm.com/%E4%BD%A0%E6%98%AF%E6%88%91%E7%9A%84%E7%9C%BC.mp4",  //你是我的眼
+    "2":"http://qiniu.ygrnzsm.com/%E5%8A%A0%E6%B2%B9.mp4",              //加油
+    "3":"http://qiniu.ygrnzsm.com/%E5%B0%8F%E6%8F%90%E7%90%B4.mp4",     //小提琴
+    "4":"http://qiniu.ygrnzsm.com/%E6%96%91%E9%A9%AC.mp4",              //斑马
+    "5":"http://qiniu.ygrnzsm.com/%E9%87%91%E7%BF%85.mp4",              //金翅
+    "6":"http://qiniu.ygrnzsm.com/%E6%9C%80%E5%88%9D%E7%9A%84%E6%A2%A6%E6%83%B3.mp4",//最初的梦想
+    "7":"http://qiniu.ygrnzsm.com/%E5%A5%94%E8%B7%91.mp4"   //奔跑
+  }
+  window.addEventListener('hashchange',function () {
+    var id=location.hash.replace("#",'')
+    console.log(document.querySelector("#source"));
+    document.querySelector("#video").src=videoControl[id]
+    document.querySelector("#video").play()
+  })
+</script>
+</body>
+</html>
