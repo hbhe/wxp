@@ -12,7 +12,7 @@ class WxUserController extends \yii\console\Controller
     public function init()
     {
         Yii::$app->getUrlManager()->setBaseUrl('/wx/web/index.php');
-        Yii::$app->getUrlManager()->setHostInfo('http://wosotech.com');
+        Yii::$app->getUrlManager()->setHostInfo('http://mysite.com');
         Yii::$app->getUrlManager()->setScriptUrl('/wx/web/index.php');
     }
 

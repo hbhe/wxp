@@ -2,9 +2,8 @@
 /**
  * Alidayu SM file.
  *
- * @link http://www.9tui.cn/
- * @copyright Copyright (c) 2008 wstech Software LLC
- * @license http://www.9tui.cn/license/
+ * @link http://www.mysite.com/
+ * @license http://www.mysite.com/license/
 
 模板ID:    SMS_16820509
 模板内容:    您的验证码${code}，有效期15分钟。如非本人操作，请忽略本短信。 
@@ -16,8 +15,8 @@ require_once(Yii::getAlias('@common/wosotech/alidayu/TopSdk.php'));
 
 $c = new \TopClient;
 $c->format = 'json';
-$c ->appkey = '23470660' ;
-$c ->secretKey = '782b1f506bf12fe9edfef5bd7e3a4c58' ;
+$c ->appkey = 'xxx' ;
+$c ->secretKey = 'xxxx' ;
 $req = new \AlibabaAliqinFcSmsNumSendRequest;
 $req ->setExtend( "" );
 $req ->setSmsType( "normal" );
@@ -33,8 +32,8 @@ if (isset($resp->{'code'})) {
 或者配置component
 'sm' => [
     'class' => 'common\wosotech\SmAlidayu',
-    'appkey' => '23466963',
-    'secretKey' => 'e9ae28423c937c952e33be106273bed0',       
+    'appkey' => 'xxx',
+    'secretKey' => 'xxx',
     'freeSignName' => '麦田希望',                 // 签名
     'smsTemplateCodeVerify' => 'SMS_16820509',  // 校验短信模板名, 每个模板所包含的参数个数和参数名都不一样
 ],

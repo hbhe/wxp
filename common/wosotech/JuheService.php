@@ -1,9 +1,8 @@
 <?php
 
 /**
- * @link http://www.wosotech.com.com/
- * @copyright Copyright (c) 2015 Wosotech LLC
- * @license http://www.wosotech.com/license/
+ * @link http://www.mysite.com/
+ * @license http://www.mysite.com/license/
  *
  * for example:
  *

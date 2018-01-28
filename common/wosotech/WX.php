@@ -1,8 +1,8 @@
 <?php
 /**
- * @link http://www.wstech.com/
+ * @link http://www.mysite.com/
  * @copyright Copyright (c) 2015 wstech LLC
- * @license http://www.wstech.com/license/
+ * @license http://www.mysite.com/license/
  *
  * Yii component, Just a Wrap of easywechat, 
  *
@@ -14,7 +14,7 @@
  * 'class' => 'common\wosotech\WX',
  * 'config' => [
  * 'debug' => true,
- * 'app_id' => 'wxd1806e66fe96a00c',
+ * 'app_id' => 'wx_88888888',
  * 'secret' => '17ac86b02a204254b4a563cd6a3c05af',
  * 'token' => 'vDHg6heBH3m6OM6F7D3638EObEZEDm3b',
  * //'aes_key' => 'aaa',
@@ -48,7 +48,7 @@
  * 'class' => 'common\wosotech\WX',
  * 'config' => [
  * 'debug' => true,
- * 'app_id' => 'wxd1806e66fe96a00c',
+ * 'app_id' => 'wx_88888888',
  * 'secret' => '17ac86b02a204254b4a563cd6a3c05af',
  * 'token' => 'vDHg6heBH3m6OM6F7D3638EObEZEDm3b',
  * //'aes_key' => 'aaa',
