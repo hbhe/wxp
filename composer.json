@@ -56,8 +56,7 @@
     "overtrue/wechat": "~3.1",
     "2amigos/yii2-tinymce-widget" : "~1.1",
     "2amigos/yii2-highcharts-widget" : "~1.0",
-    "noam148/yii2-image-manager" : "*",
-    "loveorigami/yii2-plugins-system": "^3.1"
+    "noam148/yii2-image-manager" : "*"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "^2.0.0",

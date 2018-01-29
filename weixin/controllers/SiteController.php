@@ -38,7 +38,7 @@ class SiteController extends Controller
                 case Guard::EVENT_AUTHORIZED:
                     /*
                     [
-                        'AppId' => 'wx8b3e8a9bda460897',
+                        'AppId' => 'xxx',
                         'CreateTime' => '1498789407',
                         'InfoType' => 'authorized',
                         'AuthorizerAppid' => 'wx3283c99746957d28',
@@ -55,7 +55,7 @@ class SiteController extends Controller
                 case Guard::EVENT_UNAUTHORIZED:
                     /*
                     [
-                        'AppId' => 'wx8b3e8a9bda460897',
+                        'AppId' => 'xxx',
                         'CreateTime' => '1498789228',
                         'InfoType' => 'unauthorized',
                         'AuthorizerAppid' => 'wx3283c99746957d28',

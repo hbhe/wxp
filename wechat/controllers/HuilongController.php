@@ -43,7 +43,7 @@ class HuilongController extends Controller
             /*            
             yii::error($arr);
             [
-                'ToUserName' => 'gh_99a615884d6d',
+                'ToUserName' => 'gh_xxxxx',
                 'FromUserName' => 'oNozyw6gl7lc5DYTNs8ob-SNpDX8',
                 'CreateTime' => '1493874629',
                 'MsgType' => 'event',
@@ -75,8 +75,9 @@ class HuilongController extends Controller
             return WxGh::findOne(['gh_id' => $gh_id]);
         }, 3600);
 
-        //$url = env('WECHAT_URL') . "index.php?r=site&gh_id=$gh_id";
         $url = Url::to(['site/index', 'gh_id' => $gh_id], true);
+
+        // 将收到的XML转发给另一个微信消息服务器
         $response = \common\wosotech\Util::forwardWechatXML($url, $gh->token, $xml);
         
         return $response;

@@ -66,32 +66,41 @@ GLIDE_MAX_IMAGE_SIZE = 4000000
 
 4、执行命令，安装相关的数据库表
 
-cd console                // php yii app/setup ?
+cd console               
 
-必选安装:
+执行以下步骤:
 * php yii migrate/up --migrationPath=@common/wosotech/modules/keyStorage/migrations
 * php yii migrate --migrationPath=@noam148/imagemanager/migrations
 * php yii migrate/up
 * php yii rbac-migrate   // 给初始化用户分配权限
 
 
-可选安装:
+以下为可选:
 * php yii migrate/up --migrationPath=@common/modules/bargain/migrations      // 砍价活动
 * php yii migrate/up --migrationPath=@common/modules/wall/migrations         // 微信现场活动(包括：微信签到，微信消息互动上墙， 微信摇一摇抽奖)
 * php yii migrate/up --migrationPath=@common/modules/redpack/migrations      // 会员推荐送红包活动
 
 
-5、后台访问地址: http://127.0.0.1/wxp/backend/web/
+5、后台访问地址: http://127.0.0.1/wxp/backend/web/    用户名: webmaster   密码: webmaster
 
-用户名: webmaster     密码: webmaster
+6、到微信公众号官网进行配置, url(如http://wechat.mysite.com/index.php?r=site&gh_id=gh_6b9b67032eaa )
+   
+7. 在wxp后台，接入公众号, 输入appid, appsecret, token, ... 
+（这种输入方式比较繁琐，也可以以扫码授权的形式接入公众号，不过得先到微信第三方开放平台申请成为服务商，然后在wxp中配置一下）
 
 
 #本平台特点:
 
-* 支持管理多个公众号
+* 支持管理多个公众号，支持扫码授权（不需要输入繁琐的appid, secret等）
 * 可以对第三方开发者提供获取openid的接口(网页授权); 不仅可以自定义关键词对消息进行处理，还可以将收到的微信消息原封不动地转发给第三方, 接受第三方处理消息后的返回结果
-* 以模块的形式支付上架营销活动，并提供了一个砍价活动例子(RESTful)
+* 以模块的形式支付上架营销活动，并提供了一个砍价活动例子(前后端分离，RESTful接口)
 * 粉丝管理、菜单管理、会员管理、部门管理、关键词定义、
 * 3个微信现场活动: 微信签到上墙、微信互动消息上墙、微信摇一摇抽奖
 
+
+要通过网页授权获取openid，必须先知道当前页面是使用的哪个公众号，有2种方式:
+* 在每个页面的url中都加上一个gh_id参数，如http://mysite.com/index.php?gh_id=gh_123456, PHP通过$_GET['gh_id']得知gh_id. 这种方式不太可靠
+* 通过域名，http://wx123456.mysite.com， ，配置一下nginx(请参考sample.nginx.conf文件), 将wx123456传到PHP环境中, PHP通过$_SERVER['gh_sid']可取到值wx123456, 一般就以appid作为域名前缀, 这种方式好
+
+知道是哪个公众号后，每个PHP页面就都可以通过 $openid = \common\wosotech\Util::getSessionOpenid(); 自动获取当前用户的openid
 

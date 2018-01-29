@@ -74,7 +74,6 @@ class Wechat extends \yii\base\Component
     public function run()
     {
         if ($gh_id = Yii::$app->request->get('gh_id')) {
-
             $this->gh = WxGh::findOne(['gh_id' => $gh_id]);
         } else if ($appid = Yii::$app->request->get('appid')) {
             $this->gh = WxAuthorizer::findOne(['authorizer_appid' => $appid])->gh;

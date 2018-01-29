@@ -1,5 +1,7 @@
 <?php
 
+use common\models\WxGh;
+use common\wosotech\WX;
 use yii\db\Migration;
 
 class m161116_115156_create_init_tables extends Migration
@@ -79,6 +81,16 @@ class m161116_115156_create_init_tables extends Migration
         ], $tableOptions);        
         $this->createIndex('idx_gh_id', 'wx_gh', ['gh_id'], true);
         $this->createIndex('sid', 'wx_gh', ['sid'], true);
+
+        $model = new WxGh();
+        $model->setAttributes([
+            'title' => '测试公众号',
+            'gh_id' => WxGh::WXGH_DEMO,
+            'appId' => 'wxfadd14294fa1624f',
+            'appSecret' => 'xxx',
+            'sid' => 'wxfadd14294fa1624f',
+        ]);
+        $model->save();
 
         $this->createTable('wx_msg_log', [
             'id' => $this->primaryKey(),

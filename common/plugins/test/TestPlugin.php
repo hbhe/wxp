@@ -13,6 +13,7 @@ use yii\web\Response;
  * Description: Small test plugin
  * Author: hbhe
  * Author URI: https://github.com/hbhe
+ * see "loveorigami/yii2-plugins-system": "^3.1" in github
  */
  
 class TestPlugin extends BasePlugin

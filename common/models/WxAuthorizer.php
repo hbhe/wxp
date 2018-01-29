@@ -149,11 +149,12 @@ class WxAuthorizer extends \yii\db\ActiveRecord
                         'verify' => false,
                     ],
 
+                    // 要成为第三方平台，为其它公众号提供解决方案, 须到https://open.weixin.qq.com/ 注册申请, 成功后就会有以下参数
                     'open_platform' => [
-                        'app_id' => 'wx8b3e8a9bda460897',
-                        'secret' => 'bf3f020b5e9e39110a430d5605861995',
-                        'token' => 'keyboardcat123',
-                        'aes_key' => 'keyboardcat123keyboardcat123keyboardcat123k',
+                        'app_id' => 'xxx',
+                        'secret' => 'xxxxxx',
+                        'token' => 'xxxxx',
+                        'aes_key' => 'xxxx',
                         'oauth' => [
                             'scopes' => [$scope], // scopes: snsapi_userinfo, snsapi_base, snsapi_login
                         ],
@@ -218,7 +219,7 @@ class WxAuthorizer extends \yii\db\ActiveRecord
         Yii::error($info);
         [
             'authorizer_info' => [
-                'nick_name' => 'xx电信',
+                'nick_name' => 'xx',
                 'head_img' => 'http://wx.qlogo.cn/mmopen/2LH29aX0ibfp8OWmKV0Sy/0',
                 'service_type_info' => [
                     'id' => 2,
@@ -237,8 +238,8 @@ class WxAuthorizer extends \yii\db\ActiveRecord
                     'open_store' => 0,
                 ],
                 'idc' => 1,
-                'principal_name' => '中国电信xx分公司',
-                'signature' => '提供中国电信xx地区话费、积分查询等。',
+                'principal_name' => 'xxx',
+                'signature' => 'xxx',
             ],
             'authorization_info' => [
                 'authorizer_appid' => 'wx4776f6dc70c1aca0',
