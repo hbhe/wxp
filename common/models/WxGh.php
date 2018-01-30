@@ -5,8 +5,6 @@ namespace common\models;
 use common\wosotech\Util;
 use EasyWeChat\Message\Text;
 use Yii;
-use yii\base\Exception;
-use yii\behaviors\SluggableBehavior;
 use yii\helpers\Url;
 
 /**
@@ -46,7 +44,7 @@ class WxGh extends \yii\db\ActiveRecord
     {
         $arr = [
             static::PLATFORM_WXP => 'WXP',
-            static::PLATFORM_HUILONG => '转发',
+            static::PLATFORM_HUILONG => '其它',
         ];
         return $key === null ? $arr : (isset($arr[$key]) ? $arr[$key] : '');
     }
@@ -108,15 +106,15 @@ class WxGh extends \yii\db\ActiveRecord
                 'class' => \yii\behaviors\TimestampBehavior::className(),
                 'value' => new \yii\db\Expression('NOW()'),
             ],
-/*
-            [
-                'class' => SluggableBehavior::className(),
-                'slugAttribute' => 'sid',
-                'attribute' => 'title',
-                'ensureUnique' => true,
-                'immutable' => true,
-            ],
-*/
+            /*
+                        [
+                            'class' => SluggableBehavior::className(),
+                            'slugAttribute' => 'sid',
+                            'attribute' => 'title',
+                            'ensureUnique' => true,
+                            'immutable' => true,
+                        ],
+            */
         ];
     }
 
@@ -242,7 +240,7 @@ class WxGh extends \yii\db\ActiveRecord
             $staff = $wxapp->staff;
             $rows = $staff->lists()->toArray();
             return $rows['kf_list'];
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Yii::error([__METHOD__, $e->getMessage()]);
             return [];
         }
@@ -285,22 +283,7 @@ class WxGh extends \yii\db\ActiveRecord
     /*
      * 新的函数取代forwardOpenidCode()
      */
-    public function redirectWithOpenid($scope, $redirect_uri)
-    {
-        $info = Util::getSessionOpenidInfo(true, $scope);
-        $params = [];
-        //$params = ['openid' => $info['openid']];
-        $params = ['openid' => $info['openid']];
-        $redirect_uri .= stripos($redirect_uri, '?') === false ? '?' : '&';
-        $redirect_uri .= http_build_query($params, '', '&');
 
-        \yii::$app->getResponse()->redirect($redirect_uri)->send();
-        \yii::$app->end();
-    }
-
-    /*
-     * 获取openid_info（如snsapi_userinfo时含头像信息），不带缓存
-     */
     public function getSessionOpenid($dynamicOauthCallback = true, $scope = 'snsapi_base')
     {
         $wxapp = $this->getWxApp($scope, $dynamicOauthCallback)->getApplication();
@@ -347,9 +330,26 @@ class WxGh extends \yii\db\ActiveRecord
     }
 
     /*
+     * 获取openid_info（如snsapi_userinfo时含头像信息），不带缓存
+     */
+
+    public function redirectWithOpenid($scope, $redirect_uri)
+    {
+        $info = Util::getSessionOpenidInfo(true, $scope);
+        $params = [];
+        //$params = ['openid' => $info['openid']];
+        $params = ['openid' => $info['openid']];
+        $redirect_uri .= stripos($redirect_uri, '?') === false ? '?' : '&';
+        $redirect_uri .= http_build_query($params, '', '&');
+
+        \yii::$app->getResponse()->redirect($redirect_uri)->send();
+        \yii::$app->end();
+    }
+
+    /*
     http://m.mysite.com/index.php?r=authorize&appid=wxfadd14294fa1624f&redirect_uri=http%3A%2F%2Fm.mysite.com%2Findex.php%3Fr%3Dauthorize%252Ftest&response_type=code
     http://m.mysite.com/index.php?r=authorize&appid=wxfadd14294fa1624f&redirect_uri=http%3A%2F%2Fm.mysite.com%2Findex.php%3Fr%3Dauthorize%252Ftest&response_type=code
-    http://jmdx.mysite.com/index.php?r=authorize&appid=wx3283c99746957d28&want_openid=1&redirect_uri=http%3A%2F%2Fm.mysite.com%2Findex.php%3Fr%3Dauthorize%252Ftest&state=STATE#wechat_redirect
+    http://wx3283c99746957d28.mysite.com/index.php?r=authorize&appid=wx3283c99746957d28&want_openid=1&redirect_uri=http%3A%2F%2Fm.mysite.com%2Findex.php%3Fr%3Dauthorize%252Ftest&state=STATE#wechat_redirect
     http://127.0.0.1/wxp/mobile/web/index.php?r=authorize&appid=wxfadd14294fa1624f&redirect_uri=http%3A%2F%2F127.0.0.1%2Fwxp%2Fmobile%2Fweb%2Findex.php%3Fr%3Dauthorize%252Ftest&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
     http://127.0.0.1/wxp/mobile/web/index.php?r=authorize&appid=wxfadd14294fa1624f&want_openid=1&redirect_uri=http%3A%2F%2F127.0.0.1%2Fwxp%2Fmobile%2Fweb%2Findex.php%3Fr%3Dauthorize%252Ftest&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
     */
@@ -381,7 +381,7 @@ class WxGh extends \yii\db\ActiveRecord
             'remark' => $remark,
         ];
 
-        \yii::info("$mch_billno, $openid, $amount, $wishing, $act_name, $remark");
+        yii::info("$mch_billno, $openid, $amount, $wishing, $act_name, $remark");
 
         if ($debug) {
             return $mch_billno;
@@ -395,21 +395,9 @@ class WxGh extends \yii\db\ActiveRecord
         return false;
     }
 
-    public function querySendRedpack($mch_billno)
-    {
-        $wxapp = $this->getWxApp()->getApplication();
-        $luckyMoney = $wxapp->lucky_money;
-        $result = $luckyMoney->query($mch_billno)->toArray();
-        if (isset($result['return_code']) && isset($result['result_code']) && $result['return_code'] === 'SUCCESS' && $result['result_code'] === 'SUCCESS') {
-            return $result;
-        }
-        yii::warning([__METHOD__, __LINE__, $mch_billno, $result]);
-        return false;
-    }
-
     /*
-    // SENDING:发放中,SENT:已发放待领取,FAILED：发放失败,RECEIVED:已领取,RFUND_ING:退款中,REFUND:已退款 
-    [    
+    // SENDING:发放中,SENT:已发放待领取,FAILED：发放失败,RECEIVED:已领取,RFUND_ING:退款中,REFUND:已退款
+    [
         'return_code' => 'SUCCESS',
         'return_msg' => 'OK',
         'result_code' => 'SUCCESS',
@@ -431,9 +419,23 @@ class WxGh extends \yii\db\ActiveRecord
                 'rcv_time' => '2017-05-11 10:19:41',
             ],
         ],
-    ]    
+    ]
     */
+    public function querySendRedpack($mch_billno)
+    {
+        $wxapp = $this->getWxApp()->getApplication();
+        $luckyMoney = $wxapp->lucky_money;
+        $result = $luckyMoney->query($mch_billno)->toArray();
+        if (isset($result['return_code']) && isset($result['result_code']) && $result['return_code'] === 'SUCCESS' && $result['result_code'] === 'SUCCESS') {
+            return $result;
+        }
+        yii::warning([__METHOD__, __LINE__, $mch_billno, $result]);
+        return false;
+    }
 
+    /*
+     * 通过客服接口发送消息
+     */
     public function sendCustomText($openid, $text)
     {
         $msg = new Text(['content' => $text]);
@@ -441,36 +443,10 @@ class WxGh extends \yii\db\ActiveRecord
         return $wxapp->staff->message($msg)->to($openid)->send();
     }
 
-    public function sendSmVerifyCodeRenxinl($mobile, $text)
+    public function getWxAuthorizer()
     {
-        $requestUrl = 'http://apis.renxinl.com:8080/smsgate/batchsend.do' . "?";
-        $user = '15697289437';
-        $pwd = md5('15697289437');
-        $params = [
-            'user' => $user,
-            'pwd' => $pwd,
-            'phone' => $mobile,
-            'msg' => " 【{$this->title}】{$text}",
-        ];
-        foreach ($params as $key => $value) {
-            $requestUrl .= "$key=" . urlencode($value) . "&";
-        }
-        $requestUrl = substr($requestUrl, 0, -1);
-        try {
-            $resp = Util::curl($requestUrl, []);
-        } catch (Exception $e) {
-            yii::error([$e->getCode() . ':' . $e->getMessage(), $resp]);
-            return false;
-        }
-        if (isset($resp['code']) && $resp['code'] !== '0000') {
-            yii::error($resp);
-            return false;
-        }
-
-        return $resp;
+        return $this->hasOne(WxAuthorizer::className(), ['authorizer_appid' => 'appId']);
     }
-
-    // http://apis.renxinl.com:8080/smsgate/batchsend.do?user=15697289437&pwd=12c3d6d8d09c8ded6e6ecad13d65b712&phone=15527210477&msg=【荆门电信】您的验证码为：123456    
 
     public function sendTemplateSample($openid)
     {
@@ -478,8 +454,8 @@ class WxGh extends \yii\db\ActiveRecord
         $url = '';
         $first = '';
         $remark = PHP_EOL;
-        $first .= '您好，恭喜您，已有人响应您发布的帖子。' . PHP_EOL;
-        $remark .= '您可以免积分添加' . $openid . '为好友，有效期72小时。';
+        $first .= '这是一个发送模板消息的例子。' . PHP_EOL;
+        $remark .= '这是发给' . $openid . '的一个模板消息。';
         $data = [
             'first' => [
                 'value' => $first,
@@ -521,343 +497,6 @@ class WxGh extends \yii\db\ActiveRecord
         return $responseArray['template_id'];
     }
 
-    //报修提醒
-    public function sendBroadSample($openid, $tel, $content)
-    {
-        $app = $this->getWxApp()->getApplication();
-        $url = '';
-        $first = '';
-        $remark = PHP_EOL;
-        $first .= '您好，您有新的报修消息，请注意查收！';
-        $remark .= '无';
-        $data = [
-            'first' => [
-                'value' => $first,
-                'color' => '#173177',
-            ],
-            'keyword1' => [
-                'value' => time(),
-                'color' => '#173177',
-            ],
-            'keyword2' => [
-                'value' => $content,
-                'color' => '#173177',
-            ],
-            'keyword3' => [
-                'value' => '无',
-                'color' => '#173177',
-            ],
-            'keyword4' => [
-                'value' => $tel,
-                'color' => '#173177',
-            ],
-            'remark' => [
-                'value' => $remark,
-                'color' => '#173177',
-            ],
-        ];
-
-        $responseArray = $app->notice->send([
-            'touser' => $openid,
-            'template_id' => $this->getTemplateId('OPENTM205526300'),
-            'url' => $url,
-            //'topcolor' => '',
-            'data' => $data,
-        ]);
-    }
-
-    //活动成行通知
-    public function sendActivitySample($openid, $title, $content)
-    {
-        $app = $this->getWxApp()->getApplication();
-        $url = '';
-        $first = '';
-        $remark = PHP_EOL;
-        $first .= $title;
-        $remark .= $content;
-        $data = [
-            'first' => [
-                'value' => $first,
-                'color' => '#173177',
-            ],
-            'keyword1' => [
-                'value' => $title,
-                'color' => '#173177',
-            ],
-            'keyword2' => [
-                'value' => '',
-                'color' => '#173177',
-            ],
-            'remark' => [
-                'value' => $remark,
-                'color' => '#173177',
-            ],
-        ];
-
-        $responseArray = $app->notice->send([
-            'touser' => $openid,
-            'template_id' => $this->getTemplateId('OPENTM407447368'),
-            'url' => $url,
-            //'topcolor' => '',
-            'data' => $data,
-        ]);
-    }
-
-    //预约提醒
-    public function sendOrderSample($openid, $name, $time, $address = '')
-    {
-        $app = $this->getWxApp()->getApplication();
-        $url = '';
-        $first = '';
-        $remark = PHP_EOL;
-        $first .= "您好,您有新的预约消息!";
-        $remark .= "麻烦尽快处理,谢谢!";
-        $data = [
-            'first' => [
-                'value' => $first,
-                'color' => '#173177',
-            ],
-            'keyword1' => [
-                'value' => $name,
-                'color' => '#173177',
-            ],
-            'keyword2' => [
-                'value' => $time,
-                'color' => '#173177',
-            ],
-            'keyword3' => [
-                'value' => $address,
-                'color' => '#173177',
-            ],
-            'remark' => [
-                'value' => $remark,
-                'color' => '#173177',
-            ],
-        ];
-
-        $responseArray = $app->notice->send([
-            'touser' => $openid,
-            'template_id' => $this->getTemplateId('OPENTM206749817'),
-            'url' => $url,
-            //'topcolor' => '',
-            'data' => $data,
-        ]);
-    }
-
-    //提交审核提醒
-    public function sendItemSample($openid, $title, $nickname, $content)
-    {
-        $app = $this->getWxApp()->getApplication();
-        $url = '';
-        $first = '';
-        $remark = PHP_EOL;
-        $first .= '您好,有新的营业厅发布活动,请及时审核！';
-        $remark .= $content;
-        $data = [
-            'first' => [
-                'value' => $first,
-                'color' => '#173177',
-            ],
-            'keyword1' => [
-                'value' => $title . "发布新活动申请",
-                'color' => '#173177',
-            ],
-            'keyword2' => [
-                'value' => $nickname,
-                'color' => '#173177',
-            ],
-            'keyword3' => [
-                'value' => '无',
-                'color' => '#173177',
-            ],
-            'keyword4' => [
-                'value' => date('Y-m-d H:i:s', time()),
-                'color' => '#173177',
-            ],
-            'remark' => [
-                'value' => $remark,
-                'color' => '#173177',
-            ],
-        ];
-
-        $responseArray = $app->notice->send([
-            'touser' => $openid,
-            'template_id' => $this->getTemplateId('OPENTM200631294'),
-            'url' => $url,
-            //'topcolor' => '',
-            'data' => $data,
-        ]);
-    }
-
-    //审核通过提醒
-    public function sendPassSample($openid, $title)
-    {
-        $app = $this->getWxApp()->getApplication();
-        $url = '';
-        $first = '';
-        $remark = PHP_EOL;
-        $first .= '您好,您提交的 ' . $title . ' 活动已通过审核！';
-        $remark .= '您发布的' . $title . '活动已经通过审核,您可以登录后台上架了!';
-        $data = [
-            'first' => [
-                'value' => $first,
-                'color' => '#173177',
-            ],
-            'keyword1' => [
-                'value' => "已通过审核",
-                'color' => '#173177',
-            ],
-            'keyword2' => [
-                'value' => date('Y-m-d H:i:s', time()),
-                'color' => '#173177',
-            ],
-            'remark' => [
-                'value' => $remark,
-                'color' => '#173177',
-            ],
-        ];
-
-        $responseArray = $app->notice->send([
-            'touser' => $openid,
-            'template_id' => $this->getTemplateId('OPENTM405933510'),
-            'url' => $url,
-            //'topcolor' => '',
-            'data' => $data,
-        ]);
-    }
-
-    //审核不通过提醒
-    public function sendNotpassSample($openid, $title, $description)
-    {
-        $app = $this->getWxApp()->getApplication();
-        $url = '';
-        $first = '';
-        $remark = PHP_EOL;
-        $first .= '非常抱歉,您提交的 ' . $title . ' 活动未能通过审核！';
-        $remark .= $description;
-        $data = [
-            'first' => [
-                'value' => $first,
-                'color' => '#173177',
-            ],
-            'keyword1' => [
-                'value' => $title,
-                'color' => '#173177',
-            ],
-            'keyword2' => [
-                'value' => '未能通过审核',
-                'color' => '#173177',
-            ],
-            'keyword3' => [
-                'value' => '',
-                'color' => '#173177',
-            ],
-            'remark' => [
-                'value' => $remark,
-                'color' => '#173177',
-            ],
-        ];
-
-        $responseArray = $app->notice->send([
-            'touser' => $openid,
-            'template_id' => $this->getTemplateId('OPENTM403088742'),
-            'url' => $url,
-            //'topcolor' => '',
-            'data' => $data,
-        ]);
-    }
-
-    //活动关注成功通知
-    public function sendFocusSample($openid)
-    {
-        $app = $this->getWxApp()->getApplication();
-        $url = "http://mp.weixin.qq.com/s/Bj-S2WXAgqH0iTUpvJ4HXQ";
-        $first = '';
-        $remark = PHP_EOL;
-        $first .= '重磅通知！';
-        $remark .= "点击查看详细活动内容！";
-        $data = [
-            'first' => [
-                'value' => $first,
-                'color' => '#173177',
-            ],
-            'keyword1' => [
-                'value' => "99元流量不限量套餐重磅上市",
-                'color' => '#173177',
-            ],
-            'keyword2' => [
-                'value' => '孝感电信营业厅',
-                'color' => '#173177',
-            ],
-            'keyword3' => [
-                'value' => "正在火爆抢购中！",
-                'color' => '#173177',
-            ],
-            'remark' => [
-                'value' => $remark,
-                'color' => '#173177',
-            ],
-        ];
-
-        $responseArray = $app->notice->send([
-            'touser' => $openid,
-            'template_id' => $this->getTemplateId('OPENTM202023992'),
-            'url' => $url,
-            //'topcolor' => '',
-            'data' => $data,
-        ]);
-    }
-
-    //孝感3元话费充值失败提醒
-    public function sendRechargeSample($openid, $tel, $flow, $status, $restatus, $package = 3, $pin = "永乐平台")
-    {
-        $app = $this->getWxApp()->getApplication();
-        $url = '';
-        $first = '';
-        $remark = PHP_EOL;
-        $first .= '孝感' . $package . '元话费充值结果通知！';
-        $remark .= '下单状态：' . $status . "---" . "充值状态：" . $restatus;
-        $data = [
-            'first' => [
-                'value' => $first,
-                'color' => '#173177',
-            ],
-            'keyword1' => [
-                'value' => $flow,
-                'color' => '#173177',
-            ],
-            'keyword2' => [
-                'value' => $tel,
-                'color' => '#173177',
-            ],
-            'keyword3' => [
-                'value' => $pin,
-                'color' => '#173177',
-            ],
-            'keyword4' => [
-                'value' => $package . "元话费",
-                'color' => '#173177',
-            ],
-            'keyword5' => [
-                'value' => $package . "块",
-                'color' => '#173177',
-            ],
-            'remark' => [
-                'value' => $remark,
-                'color' => '#173177',
-            ],
-        ];
-
-        $responseArray = $app->notice->send([
-            'touser' => $openid,
-            'template_id' => $this->getTemplateId('OPENTM407500755'),
-            'url' => $url,
-            //'topcolor' => '',
-            'data' => $data,
-        ]);
-    }
-
-
     private function postXmlCurl($xml, $url, $useCert = false, $second = 30)
     {
         $ch = curl_init();
@@ -889,11 +528,5 @@ class WxGh extends \yii\db\ActiveRecord
             throw new WxPayException("curl出错，错误码:$error");
         }
     }
-
-    public function getWxAuthorizer()
-    {
-        return $this->hasOne(WxAuthorizer::className(), ['authorizer_appid' => 'appId']);
-    }
-
 }
 
