@@ -108,7 +108,7 @@ class WxGh extends \yii\db\ActiveRecord
                 'class' => \yii\behaviors\TimestampBehavior::className(),
                 'value' => new \yii\db\Expression('NOW()'),
             ],
-
+/*
             [
                 'class' => SluggableBehavior::className(),
                 'slugAttribute' => 'sid',
@@ -116,7 +116,7 @@ class WxGh extends \yii\db\ActiveRecord
                 'ensureUnique' => true,
                 'immutable' => true,
             ],
-
+*/
         ];
     }
 
@@ -125,14 +125,11 @@ class WxGh extends \yii\db\ActiveRecord
         if ($insert) {
             $this->token = $this->token ?: Y::randomString(Y::RANDOM_NONCESTRING, 16);
             $this->encodingAESKey = $this->encodingAESKey ?: Y::randomString(Y::RANDOM_NONCESTRING, 43);
-
             $this->appSecret = $this->appSecret ?: Y::randomString(Y::RANDOM_NONCESTRING, 16);
-
         }
         if (empty($this->wxPayApiKey)) {
             $this->wxPayApiKey = Y::randomString(Y::RANDOM_NONCESTRING, 32);
         }
-
         return parent::beforeSave($insert);
     }
 

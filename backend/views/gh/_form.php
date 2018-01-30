@@ -33,7 +33,7 @@ $this->registerJs($js, yii\web\View::POS_READY);
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     
-    <?php echo $form->field($model, 'sid')->textInput(['maxlength' => true]) ?>
+    <?php //echo $form->field($model, 'sid')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'client_id')->dropDownList(\yii\helpers\ArrayHelper::map(
         \common\models\WxClient::find()->orderBy('shortname')->all(),
