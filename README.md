@@ -113,3 +113,6 @@ chmod -R 777 ./common/runtime
 
 知道是哪个公众号后，每个PHP页面就都可以通过 $openid = \common\wosotech\Util::getSessionOpenid(); 自动获取当前用户的openid
 
+
+**如果觉得此项目对你有用，请点亮star；如果在使用中遇到问题请Q：57620133**
+
