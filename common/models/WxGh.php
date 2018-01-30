@@ -94,7 +94,7 @@ class WxGh extends \yii\db\ActiveRecord
             'clientName' => '所属客户',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
-            'platform' => '传统平台',           // 0:WXP, 1:汇龙
+            'platform' => '传统平台',           // 0:WXP, 1:
             'is_service' => '服务号',   // 0: 订阅号, 1:服务号
             'is_authenticated' => '已认证', // 0:未认证, 1:已认证
             'qr_image_id' => '关注二维码',
@@ -173,6 +173,7 @@ class WxGh extends \yii\db\ActiveRecord
 
     public function getWxApp($scope = 'snsapi_base', $dynamicOauthCallback = true, $callbackUrl = null)
     {
+        // 如果是扫码授权认证的
         if ($this->wxAuthorizer && $this->wxAuthorizer->status == WxAuthorizer::STATUS_AUTHORIZED) {
             //Yii::error('get wxapp from auth...');
             return $this->wxAuthorizer->getWxApp($scope, $dynamicOauthCallback, $callbackUrl);
@@ -236,10 +237,15 @@ class WxGh extends \yii\db\ActiveRecord
 
     public function getKfAccounts()
     {
-        $wxapp = $this->getWxApp()->getApplication();
-        $staff = $wxapp->staff;
-        $rows = $staff->lists()->toArray();
-        return $rows['kf_list'];
+        try {
+            $wxapp = $this->getWxApp()->getApplication();
+            $staff = $wxapp->staff;
+            $rows = $staff->lists()->toArray();
+            return $rows['kf_list'];
+        } catch(\Exception $e) {
+            Yii::error([__METHOD__, $e->getMessage()]);
+            return [];
+        }
     }
 
     /*
