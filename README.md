@@ -88,12 +88,12 @@ chmod -R 777 ./backend/runtime
 chmod -R 777 ./common/runtime
 ```
 
-5、后台访问地址: http://127.0.0.1/wxp/backend/web/    用户名: webmaster   密码: webmaster
+5、到微信公众号官网进行配置, url(如http://wechat.mysite.com/index.php?r=site&gh_id=gh_6b9b67032eaa )
 
-6、到微信公众号官网进行配置, url(如http://wechat.mysite.com/index.php?r=site&gh_id=gh_6b9b67032eaa )
+6、WXP后台访问地址: http://127.0.0.1/wxp/backend/web/    用户名: webmaster   密码: webmaster
    
-7、在wxp后台，接入公众号, 输入appid, appsecret, token, ... 
-（这种输入方式比较繁琐，也可以以扫码授权的形式接入公众号，不过得先到微信第三方开放平台申请成为服务商，然后在wxp中配置一下）
+7、登录WXP后台后，接入公众号, 输入appid, appsecret, token, ... 
+（这种输入方式比较繁琐，也可以以扫码授权的形式接入公众号，不过你先得到微信第三方开放平台申请成为服务商，然后还要在wxp中配置第三方开放平台参数）
 
 
 #本平台特点:
