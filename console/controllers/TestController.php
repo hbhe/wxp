@@ -27,7 +27,6 @@ class TestController extends \yii\console\Controller
     public function actionToken($gh_id = null)
     {
         $gh = WxGh::findOne(['gh_id' => WxGh::WXGH_DEMO]);
-        //var_dump($gh->getTokenHL());
         $wxapp = $gh->getWxApp('snsapi_base', false)->getApplication();
         $accessToken = $wxapp->access_token;
         $token = $accessToken->getToken(true);
@@ -49,10 +48,8 @@ class TestController extends \yii\console\Controller
             $i++;
             if (empty($line) || strlen($line) != 13)
                 continue;
-            //var_dump($line);exit;
             $line = iconv('GBK', 'UTF-8//IGNORE', $line);
             $db->insert('wx_xyyd_card', ['phone' => $line])->execute();
-            //var_dump($phone);exit;
         }
         fclose($fh);
         exit;

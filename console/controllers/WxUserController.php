@@ -85,7 +85,7 @@ class WxUserController extends \yii\console\Controller
         var_dump($rows);
 
         $transfer = new \EasyWeChat\Message\Transfer();
-        $transfer->account('kf2001@sanjiadx');
+        $transfer->account('kf2001@mysite');
 
     }
 
