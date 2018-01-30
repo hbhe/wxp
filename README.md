@@ -111,7 +111,7 @@ chmod -R 777 ./common/runtime
 * 在每个页面的url中都加上一个gh_id参数，如http://mysite.com/index.php?gh_id=gh_123456, PHP通过$_GET['gh_id']得知gh_id. 这种方式不太可靠
 * 通过域名，http://wx123456.mysite.com， ，配置一下nginx(请参考sample.nginx.conf文件), 将wx123456传到PHP环境中, PHP通过$_SERVER['gh_sid']可取到值wx123456, 一般就以appid作为域名前缀, 这种方式好
 
-知道是哪个公众号后，每个PHP页面就都可以通过 $openid = \common\wosotech\Util::getSessionOpenid(); 自动获取当前用户的openid
+知道是哪个公众号后，每个PHP页面就都可以通过 $openid = Util::getSessionOpenid(); 自动获取当前用户的openid
 
 
 **如果觉得此项目对你有用，请点亮star；如果在使用中遇到问题请Q：57620133**
