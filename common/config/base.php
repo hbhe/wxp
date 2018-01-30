@@ -167,11 +167,12 @@ $config = [
             'class' => 'noam148\imagemanager\components\ImageManagerGetPath',
             //set media path (outside the web folder is possible)
             //  'mediaPath' => '/path/where/to/store/images/media/imagemanager',
-            'mediaPath' => Yii::getAlias('@storage/web/img'),
-            //'mediaPath' => Yii::getAlias('@backend/web/image-upload'),
+            //'mediaPath' => Yii::getAlias('@storage/web/img'),
+            'mediaPath' => Yii::getAlias('@backend/web/image-upload'),
             //path relative web folder to store the cache images
             //'cachePath' => 'assets/images',
-            'cachePath' => 'image-cache',
+            //'cachePath' => 'image-cache',
+            'cachePath' => 'assets/image-cache',
             //use filename (seo friendly) for resized images else use a hash
             'useFilename' => true,
             //show full url (for example in case of a API)
