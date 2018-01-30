@@ -79,7 +79,8 @@ $config = [
                 return true;
             },
             // Set if blameable behavior is used, if it is, callable function can also be used
-            'setBlameableBehavior' => true,
+            //'setBlameableBehavior' => true,
+            'setBlameableBehavior' => false,
             //add css files (to use in media manage selector iframe)
             'cssFiles' => [
                 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css',
