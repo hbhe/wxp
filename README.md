@@ -105,6 +105,8 @@ chmod -R 777 ./common/runtime
 * 3个微信现场活动: 微信签到上墙、微信互动消息上墙、微信摇一摇抽奖
 
 
+#开发微信公众号平台的要点：
+
 要通过网页授权获取openid，必须先知道当前页面是使用的哪个公众号，有2种方式:
 * 在每个页面的url中都加上一个gh_id参数，如http://mysite.com/index.php?gh_id=gh_123456, PHP通过$_GET['gh_id']得知gh_id. 这种方式不太可靠
 * 通过域名，http://wx123456.mysite.com， ，配置一下nginx(请参考sample.nginx.conf文件), 将wx123456传到PHP环境中, PHP通过$_SERVER['gh_sid']可取到值wx123456, 一般就以appid作为域名前缀, 这种方式好
