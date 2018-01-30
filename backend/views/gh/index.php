@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'label' => "管理",
                 'format'=>'html',
 				'value'=>function ($model, $key, $index, $column) {
-				    return Html::a('设为管理公众号', ['gh/set-session-gh-id', 'id'=>$model->id], ['title' => '', 'class' => \common\wosotech\Util::getSessionGhid() == $model->gh_id ? 'btn btn-xs btn-success' : 'btn btn-xs btn-primary']);
+				    return Html::a('管理此公众号', ['gh/set-session-gh-id', 'id'=>$model->id], ['title' => '', 'class' => \common\wosotech\Util::getSessionGhid() == $model->gh_id ? 'btn btn-xs btn-success' : 'btn btn-xs btn-primary']);
 				},
                 'headerOptions' => array('style'=>'width:70px;'),           
 			],
