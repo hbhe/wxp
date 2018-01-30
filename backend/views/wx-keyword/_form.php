@@ -82,7 +82,7 @@ use yii\bootstrap\ActiveForm;
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? '创建' : '修改', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
-    <p>说明: 消息回复的文本框中支持模板变量: {nickname}、{openid}</p>
+    <p>说明: 消息回复的文本框中支持模板变量: {nickname}、{openid}、{gh_id}</p>
     <?php ActiveForm::end(); ?>
 
 </div>
