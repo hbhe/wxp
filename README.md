@@ -81,10 +81,12 @@ cd console
 * php yii migrate/up --migrationPath=@common/modules/redpack/migrations      // 会员推荐送红包活动
 
 将相关目录设为可写:
+```
 cd ..
 chmod -R 777 ./backend/web
 chmod -R 777 ./backend/runtime
 chmod -R 777 ./common/runtime
+```
 
 5、后台访问地址: http://127.0.0.1/wxp/backend/web/    用户名: webmaster   密码: webmaster
 
