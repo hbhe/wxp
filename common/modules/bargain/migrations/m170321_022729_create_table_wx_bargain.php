@@ -93,7 +93,6 @@ class m170321_022729_create_table_wx_bargain extends Migration
 
     public function down()
     {
-        $this->dropTable('wx_activity');
         $this->dropTable('wx_bargain_topic');
         $this->dropTable('wx_bargain_item');
         $this->dropTable('wx_bargain_post');
