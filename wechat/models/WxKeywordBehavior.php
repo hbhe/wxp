@@ -39,9 +39,10 @@ class WxKeywordBehavior extends Behavior
             '{gh_id}' => $gh->title,
             '{gh_id,openid}' => "gh_id=" . $gh_id . "&openid=" . $openid,
         ];
-        //关注
+
+        // 关注
         if ($msgType == 'event' && $event == 'subscribe') {
-            //关注，被动回复
+            // 关注，被动回复
             $model = WxKeyword::find()->where(['gh_id' => $gh_id, 'inputEventType' => '_SUBSCRIBE_', 'replyway' => '_PASSIVE_'])->orderBy('priority desc')->one();
             if ($model) {
                 if ($model->type == 'text') {
@@ -54,7 +55,7 @@ class WxKeywordBehavior extends Behavior
                     $owner->response = new News(['title' => $model->title, 'description' => $model->description, 'url' => $model->url, 'image' => $model->picurl]);
                 }
             }
-            //关注，主动推送
+            // 关注，主动推送
             $models = WxKeyword::find()->where(['gh_id' => $gh_id, 'inputEventType' => '_SUBSCRIBE_', 'replyway' => '_ACTIVELY_'])->orderBy('priority desc')->all();
             if ($models) {
                 foreach ($models as $model) {
@@ -73,24 +74,24 @@ class WxKeywordBehavior extends Behavior
                     }
                 }
             }
-            //关注，消息转发
+            // 关注，消息转发
             $model = WxKeyword::find()->where(['gh_id' => $gh_id, 'inputEventType' => '_SUBSCRIBE_', 'replyway' => '_FORWARD_'])->orderBy('priority desc')->one();
             if ($model) {
-                //处理消息转发
+                // 处理消息转发
             }
         }
 
-        //关键词回复
+        // 关键词回复
         if ($msgType == 'text' || $msgType == 'event') {
             if ($msgType == 'event') {
                 $eventkey = $message->get('EventKey');
                 $content = $eventkey;
             }
 
-            //关键词，被动回复
+            // 关键词，被动回复
             $modelPassive = WxKeyword::find()->where(['gh_id' => $gh_id, 'inputEventType' => '_KEYWORD_', 'replyway' => '_PASSIVE_'])->andFilterWhere(['like', 'keyword', $content])->orderBy('priority desc')->one();//
             if ($modelPassive) {
-                //精准匹配
+                // 精准匹配
                 if ($modelPassive->match == '_ACCURATE_') {
                     if ($content == $modelPassive->keyword) {
                         if ($modelPassive->type == 'text') {
@@ -120,12 +121,12 @@ class WxKeywordBehavior extends Behavior
                                     $transfer->account($modelPassive->KfAccount);
                                 }
                             }
-                            //Yii::error('ready to goto KF system');
+                            // Yii::error('ready to goto KF system');
                             $owner->response = $transfer;
                         }
                     }
                     //模糊匹配
-                } elseif ($modelPassive->match == '_THEFUZZY_') {
+                } else if ($modelPassive->match == '_THEFUZZY_') {
                     if (stripos($modelPassive->keyword, $content) !== false) {
                         if ($modelPassive->type == 'text') {
                             $modelPassive->action = strtr($modelPassive->action, $dict);
@@ -139,11 +140,12 @@ class WxKeywordBehavior extends Behavior
                     }
                 }
             }
-            //关键词，主动推送
+
+            // 关键词，主动推送
             $modelActivelys = WxKeyword::find()->where(['gh_id' => $gh_id, 'inputEventType' => '_KEYWORD_', 'replyway' => '_ACTIVELY_'])->orderBy('priority desc')->all();
             if ($modelActivelys) {
                 foreach ($modelActivelys as $modelActively) {
-                    //精准匹配
+                    // 精准匹配
                     if ($modelActively->match == '_ACCURATE_') {
                         if ($content == $modelActively->keyword) {
                             if ($modelActively->type == 'text') {
@@ -160,8 +162,8 @@ class WxKeywordBehavior extends Behavior
                                 $wxapp->staff->message([$news])->to($openid)->send();
                             }
                         }
-                        //模糊匹配
-                    } elseif ($modelActively->match == '_THEFUZZY_') {
+                        // 模糊匹配
+                    } else if ($modelActively->match == '_THEFUZZY_') {
                         if (stripos($modelActively->keyword, $content) !== false) {
                             if ($modelActively->type == 'text') {
                                 $modelActively->action = strtr($modelActively->action, $dict);
@@ -181,10 +183,10 @@ class WxKeywordBehavior extends Behavior
                 }
             }
 
-            //关键词，消息转发
+            // 关键词，消息转发
             $modelForward = WxKeyword::find()->where(['gh_id' => $gh_id, 'inputEventType' => '_KEYWORD_', 'replyway' => '_FORWARD_'])->orderBy('priority desc')->one();
             if ($modelForward) {
-                //精准匹配
+                // 精准匹配
                 if ($modelForward->match == '_ACCURATE_') {
                     if ($content == $modelForward->keyword) {
                         $items = $message->all();
@@ -194,9 +196,9 @@ class WxKeywordBehavior extends Behavior
 
                     }
                     //模糊匹配
-                } elseif ($modelForward->match == '_THEFUZZY_') {
+                } else if ($modelForward->match == '_THEFUZZY_') {
                     if (stripos($modelForward->keyword, $content) !== false) {
-                        //处理转发消息
+                        // 处理转发消息
                     }
                 }
             }
