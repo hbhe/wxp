@@ -13,20 +13,6 @@ class m170321_022729_create_table_wx_bargain extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=myisam';
         }
 
-        $this->createTable('wx_activity', [
-            'id' => $this->primaryKey()->comment('活动ID'),
-            'sid' => $this->string(32),
-            'holiday' => $this->Integer()->notNull()->defaultValue(0)->comment('节日'), // 0:全部, 1:重阳节, ...
-            'category' => $this->Integer()->notNull()->defaultValue(0)->comment('类型'), // 0: 全部, 1:常规抽奖, ...
-            'title' => $this->string(128)->notNull()->defaultValue('')->comment('活动标题'),
-            'detail' => $this->text()->comment('活动说明'),
-            'status' => $this->smallInteger()->notNull()->defaultValue(0)->comment('状态'), // 0:已下架, 1:已上架
-            'logo_id' => $this->Integer()->notNull()->defaultValue(0)->comment('活动图片'), // 活动image id
-            'sort_order' => $this->integer()->notNull()->comment('排序'),
-            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
-            'updated_at' => $this->timestamp()->defaultValue(null),
-        ], $tableOptions);
-
         $this->createTable('wx_bargain_topic', [
             'id' => $this->primaryKey()->comment('公众号创建的活动'), // 客户(即公众号)根据activity_id创建的活动
             'activity_id' => $this->Integer()->notNull()->defaultValue(0)->comment('活动类型ID'),

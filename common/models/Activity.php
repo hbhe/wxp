@@ -40,7 +40,7 @@ class Activity extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['title'], 'string', 'max' => 128],
 
-            [['holiday', 'category', 'status', 'sort_order'], 'default', 'value' => 0],
+            [['holiday', 'category', 'status', 'sort_order', 'logo_id'], 'default', 'value' => 0],
         ];
     }
 

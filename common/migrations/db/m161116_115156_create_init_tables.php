@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Activity;
 use common\models\WxGh;
 use common\wosotech\WX;
 use yii\db\Migration;
@@ -221,23 +222,55 @@ class m161116_115156_create_init_tables extends Migration
         $this->createIndex('idx_scene_str', 'wx_memberfans', ['scene_str']);
         $this->createIndex('idx_gh_id', 'wx_memberfans', ['gh_id']);
 
+        $this->createTable('wx_activity', [
+            'id' => $this->primaryKey()->comment('活动ID'),
+            'sid' => $this->string(32),
+            'holiday' => $this->Integer()->notNull()->defaultValue(0)->comment('节日'), // 0:全部, 1:重阳节, ...
+            'category' => $this->Integer()->notNull()->defaultValue(0)->comment('类型'), // 0: 全部, 1:常规抽奖, ...
+            'title' => $this->string(128)->notNull()->defaultValue('')->comment('活动标题'),
+            'detail' => $this->text()->comment('活动说明'),
+            'status' => $this->smallInteger()->notNull()->defaultValue(0)->comment('状态'), // 0:已上架, 1:已下架
+            'logo_id' => $this->Integer()->notNull()->defaultValue(0)->comment('活动图片'), // 活动image id
+            'sort_order' => $this->integer()->notNull()->comment('排序'),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp()->defaultValue(null),
+        ], $tableOptions);
+
+        $model = new Activity();
+        $model->setAttributes([
+            'sid' => 'bargin',
+            'title' => '砍价活动',
+            'detail' => '砍价活动描述',
+        ]);
+        $model->save();
+
     }
 
     public function down()
     {
-        $this->dropTable('wx_template_id');
+        $this->dropTable('wx_user');
 
-        $this->dropTable('wx_point_log');
+        $this->dropTable('wx_client');
     
-        $this->dropTable('wx_menu');
+        $this->dropTable('wx_gh');
         
         $this->dropTable('wx_msg_log');
     
-        $this->dropTable('wx_gh');
+        $this->dropTable('wx_menu');
+
+        $this->dropTable('wx_point_log');
+
+        $this->dropTable('wx_template_id');
+
+        $this->dropTable('wx_brand');
+
+        $this->dropTable('wx_model');
+
+        $this->dropTable('wx_member');
     
-        $this->dropTable('wx_client');
-    
-        $this->dropTable('wx_user');
+        $this->dropTable('wx_memberfans');
+
+        $this->dropTable('wx_activity');
     }
 
     /*
